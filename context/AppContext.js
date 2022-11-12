@@ -90,9 +90,6 @@ function AppProvider({ children }) {
         ...state,
         isLoading: true,
       };
-
-      console.log(newState);
-
       const persistedState = JSON.stringify(newState);
       localStorage.setItem("@younotyapp-notes", persistedState);
     }
