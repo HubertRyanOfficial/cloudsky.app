@@ -11,9 +11,16 @@ interface Props {
 
 const NoteItem = ({ item }: Props) => {
   const { selectNote } = useApp();
+  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+  console.log(randomColor);
 
   return (
     <div className={styles.container} onClick={() => selectNote(item.id)}>
+      <div
+        className={styles.indentifier}
+        style={{ backgroundColor: `#${randomColor}` }}
+      />
       <strong
         className={styles.title}
         style={{
