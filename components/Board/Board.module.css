@@ -1,4 +1,48 @@
 .container {
   width: 60%;
   border-left: 1px solid var(--gray);
+  padding: 20px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputContent {
+  padding-top: 10px;
+  padding-bottom: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputContent input {
+  border: 0px;
+  font-size: 35px;
+  width: 100%;
+  margin-right: 30px;
+  color: var(--black);
+}
+
+.inputContent input:focus {
+  outline: none;
+}
+
+.inputContent > span {
+  color: var(--red);
+  transition: opacity 0.2s;
+  font-size: 20px;
+}
+
+.inputContent > span:hover {
+  opacity: 0.5;
+}
+
+.separator {
+  height: 1px;
+  background-color: var(--gray);
 }
