@@ -24,4 +24,5 @@
   margin: 10px 0;
   text-align: justify;
   color: var(--dark-gray);
+  font-weight: 400;
 }
