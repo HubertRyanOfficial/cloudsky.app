@@ -29,7 +29,9 @@ const NoteItem = ({ item }: Props) => {
       </strong>
       {!!item.content && (
         <span className={styles.content}>
-          {item.content.substring(0, 30).concat("...")}
+          {item.content.length > 30
+            ? item.content.substring(0, 30).concat("...")
+            : item.content}
         </span>
       )}
     </div>
