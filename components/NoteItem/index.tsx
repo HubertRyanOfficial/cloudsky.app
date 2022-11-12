@@ -13,8 +13,6 @@ const NoteItem = ({ item }: Props) => {
   const { selectNote } = useApp();
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
-  console.log(randomColor);
-
   return (
     <div className={styles.container} onClick={() => selectNote(item.id)}>
       <div
@@ -29,7 +27,11 @@ const NoteItem = ({ item }: Props) => {
       >
         {!!item.title ? item.title : "Sem-Título"}
       </strong>
-      <span className={styles.content}>{item.content}</span>
+      {!!item.content && (
+        <span className={styles.content}>
+          {item.content.substring(0, 30).concat("...")}
+        </span>
+      )}
     </div>
   );
 };

@@ -17,6 +17,7 @@
   font-size: 22px;
   font-weight: 500;
   line-break: strict;
+  word-break: break-all;
 }
 
 .content {
@@ -25,6 +26,7 @@
   text-align: justify;
   color: var(--dark-gray);
   font-weight: 400;
+  word-break: break-all;
 }
 
 .indentifier {
