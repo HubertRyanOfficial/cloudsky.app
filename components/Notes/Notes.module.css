@@ -28,10 +28,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px;
 }
 
 .emptyContainer > span {
   text-align: center;
   color: var(--dark-gray);
+  margin: 50px;
 }

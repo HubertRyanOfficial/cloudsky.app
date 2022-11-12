@@ -1,5 +1,5 @@
 .container {
-  width: 60%;
+  width: 100%;
   border-left: 1px solid var(--gray);
   padding: 20px;
 }
