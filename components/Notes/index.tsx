@@ -12,7 +12,7 @@ interface NotesProps {
 const Notes = () => {
   const { notes }: { notes: NotesProps[] } = useApp();
 
-  return <EmptyState />;
+  if (notes.length == 0) return <EmptyState />;
 
   return (
     <div className={styles.container}>
