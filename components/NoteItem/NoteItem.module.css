@@ -1,0 +1,26 @@
+.container {
+  padding: 15px;
+  margin-left: 100px;
+  border-bottom: 1px solid var(--gray);
+
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s;
+}
+
+.container:hover {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.content {
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: justify;
+  color: var(--dark-gray);
+}
