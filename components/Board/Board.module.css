@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   border-left: 1px solid var(--gray);
-  padding: 20px;
+  padding: 20px 40px;
 }
 
 .inputContainer {
@@ -71,6 +71,7 @@
   width: 100%;
   height: 80%;
   font-weight: 400;
+  resize: none;
 }
 
 .inputItemContent::placeholder {
