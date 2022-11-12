@@ -20,6 +20,7 @@ export const ACTIONS = {
   EDIT_NOTE: "EDIT_NOTE",
   REMOVE_NOTE: "REMOVE_NOTE",
   SELECT_NOTE: "SELECT_NOTE",
+  FORCE_NEW_NOTE: "FORCE_NEW_NOTE",
 };
 
 function appReducer(state, action) {
@@ -62,6 +63,12 @@ function appReducer(state, action) {
       return {
         ...state,
         notes,
+        selected: null,
+      };
+    }
+    case ACTIONS.FORCE_NEW_NOTE: {
+      return {
+        ...state,
         selected: null,
       };
     }
@@ -115,12 +122,19 @@ function useApp() {
     });
   };
 
+  const forceNewNote = () => {
+    dispatch({
+      type: ACTIONS.FORCE_NEW_NOTE,
+    });
+  };
+
   return {
     ...state,
     addNewNote,
     editNote,
     removeNote,
     selectNote,
+    forceNewNote,
   };
 }
 

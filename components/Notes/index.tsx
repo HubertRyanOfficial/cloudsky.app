@@ -10,13 +10,16 @@ interface NotesProps {
 }
 
 const Notes = () => {
-  const { notes }: { notes: NotesProps[] } = useApp();
+  const {
+    notes,
+    forceNewNote,
+  }: { notes: NotesProps[]; forceNewNote: () => void } = useApp();
 
   if (notes.length == 0) return <EmptyState />;
 
   return (
     <div className={styles.container}>
-      <div className={styles.newNote}>
+      <div className={styles.newNote} onClick={() => forceNewNote()}>
         <strong>NOVA NOTA</strong>
       </div>
       {notes.map((item) => (
