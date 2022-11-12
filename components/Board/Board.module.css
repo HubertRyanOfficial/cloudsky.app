@@ -33,14 +33,26 @@
   color: var(--dark-gray);
 }
 
-.inputContent > span {
+.optionSave {
   color: var(--red);
   transition: opacity 0.2s;
   font-size: 20px;
   cursor: default;
 }
 
-.inputContent > span:hover {
+.optionSave:hover {
+  opacity: 0.5;
+}
+
+.optionDelete {
+  color: var(--gray);
+  transition: opacity 0.2s;
+  font-size: 20px;
+  cursor: default;
+  margin-left: 20px;
+}
+
+.optionDelete:hover {
   opacity: 0.5;
 }
 

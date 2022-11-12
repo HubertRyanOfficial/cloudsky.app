@@ -1,3 +1,4 @@
+import { useApp } from "../../context/AppContext";
 import styles from "./NoteItem.module.css";
 
 interface Props {
@@ -9,8 +10,10 @@ interface Props {
 }
 
 const NoteItem = ({ item }: Props) => {
+  const { selectNote } = useApp();
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => selectNote(item.id)}>
       <strong
         className={styles.title}
         style={{

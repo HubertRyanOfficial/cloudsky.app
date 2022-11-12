@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Board.module.css";
 
 import { useApp } from "../../context/AppContext";
 
 const Board = () => {
-  const { addNewNote } = useApp();
+  const { addNewNote, editNote, selected, removeNote } = useApp();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    setTitle(selected?.title || "");
+    setContent(selected?.content || "");
+  }, [selected]);
 
   function handleAddNewNote() {
     if (!title && !content) {
       return;
     }
 
-    addNewNote({ title, content });
-    clearState();
+    if (!selected) {
+      addNewNote({ title, content });
+      clearState();
+    } else {
+      editNote({ title, content });
+    }
   }
 
   function clearState() {
@@ -36,14 +45,25 @@ const Board = () => {
             autoCapitalize="words"
             autoFocus
           />
-          <span
-            onClick={() => handleAddNewNote()}
-            style={{
-              color: !title && !content ? "#ddd" : "#ee5d47",
-            }}
-          >
-            SALVAR
-          </span>
+          <div className={styles.options}>
+            <span
+              onClick={() => handleAddNewNote()}
+              className={styles.optionSave}
+              style={{
+                color: !title && !content ? "#ddd" : "#ee5d47",
+              }}
+            >
+              SALVAR
+            </span>
+            {selected && (
+              <span
+                onClick={() => removeNote(selected.id)}
+                className={styles.optionDelete}
+              >
+                EXCLUIR
+              </span>
+            )}
+          </div>
         </div>
         <div className={styles.separator} />
       </div>

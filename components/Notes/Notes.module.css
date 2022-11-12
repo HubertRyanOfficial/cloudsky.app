@@ -2,6 +2,27 @@
   width: 30%;
 }
 
+.newNote {
+  margin: 20px;
+  border: 1px solid var(--red);
+  padding: 15px 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.2s;
+  cursor: default;
+}
+
+.newNote:hover {
+  opacity: 0.5;
+}
+
+.newNote > strong {
+  font-weight: 500;
+  color: var(--red);
+}
+
 .emptyContainer {
   width: 30%;
   display: flex;

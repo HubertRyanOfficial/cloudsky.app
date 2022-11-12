@@ -16,6 +16,9 @@ const Notes = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.newNote}>
+        <strong>NOVA NOTA</strong>
+      </div>
       {notes.map((item) => (
         <NoteItem key={item.id} item={item} />
       ))}

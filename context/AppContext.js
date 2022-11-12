@@ -11,11 +11,15 @@ const AppContext = createContext(null);
 const InitialState = {
   isLoading: true,
   notes: [],
+  selected: null,
 };
 
 export const ACTIONS = {
   INITIAL_STATE: "INITIAL_STATE",
   ADD_NEW_NOTE: "ADD_NEW_NOTE",
+  EDIT_NOTE: "EDIT_NOTE",
+  REMOVE_NOTE: "REMOVE_NOTE",
+  SELECT_NOTE: "SELECT_NOTE",
 };
 
 function appReducer(state, action) {
@@ -27,6 +31,38 @@ function appReducer(state, action) {
       return {
         ...state,
         notes: [...state.notes, action.payload],
+      };
+    }
+    case ACTIONS.EDIT_NOTE: {
+      let notes = [...state.notes];
+      let noteIndex = notes.findIndex((item) => item.id == state.selected.id);
+      notes[noteIndex] = {
+        ...notes[noteIndex],
+        title: action.payload.title,
+        content: action.payload.content,
+      };
+
+      return {
+        ...state,
+        notes,
+        selected: null,
+      };
+    }
+    case ACTIONS.SELECT_NOTE: {
+      let noteIndex = state.notes.findIndex(
+        (item) => item.id == action.payload
+      );
+      return {
+        ...state,
+        selected: state.notes[noteIndex],
+      };
+    }
+    case ACTIONS.REMOVE_NOTE: {
+      const notes = state.notes.filter((item) => item.id != action.payload);
+      return {
+        ...state,
+        notes,
+        selected: null,
       };
     }
     default: {
@@ -56,9 +92,35 @@ function useApp() {
     });
   };
 
+  const editNote = (note) => {
+    dispatch({
+      type: ACTIONS.EDIT_NOTE,
+      payload: {
+        ...note,
+      },
+    });
+  };
+
+  const removeNote = (id) => {
+    dispatch({
+      type: ACTIONS.REMOVE_NOTE,
+      payload: id,
+    });
+  };
+
+  const selectNote = (id) => {
+    dispatch({
+      type: ACTIONS.SELECT_NOTE,
+      payload: id,
+    });
+  };
+
   return {
     ...state,
     addNewNote,
+    editNote,
+    removeNote,
+    selectNote,
   };
 }
 
@@ -85,7 +147,7 @@ function AppProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    if (state.notes.length > 0) {
+    if (!state.isLoading) {
       const newState = {
         ...state,
         isLoading: true,
