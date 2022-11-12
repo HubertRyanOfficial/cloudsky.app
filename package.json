@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lexical/react": "^0.6.0",
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
