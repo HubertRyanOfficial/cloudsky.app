@@ -26,10 +26,11 @@
   width: 100%;
   margin-right: 30px;
   color: var(--black);
+  outline: none;
 }
 
-.inputContent input:focus {
-  outline: none;
+.inputContent input::placeholder {
+  color: var(--dark-gray);
 }
 
 .inputContent > span {
