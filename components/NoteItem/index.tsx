@@ -11,7 +11,14 @@ interface Props {
 const NoteItem = ({ item }: Props) => {
   return (
     <div className={styles.container}>
-      <strong className={styles.title}>{item.title}</strong>
+      <strong
+        className={styles.title}
+        style={{
+          color: !!item.title ? "#000000" : "#dddddd",
+        }}
+      >
+        {!!item.title ? item.title : "Sem-Título"}
+      </strong>
       <span className={styles.content}>{item.content}</span>
     </div>
   );

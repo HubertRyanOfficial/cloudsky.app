@@ -10,6 +10,10 @@ const Board = () => {
   const [content, setContent] = useState("");
 
   function handleAddNewNote() {
+    if (!title && !content) {
+      return;
+    }
+
     addNewNote({ title, content });
     clearState();
   }
@@ -32,7 +36,14 @@ const Board = () => {
             autoCapitalize="words"
             autoFocus
           />
-          <span onClick={() => handleAddNewNote()}>SALVAR</span>
+          <span
+            onClick={() => handleAddNewNote()}
+            style={{
+              color: !title && !content ? "#ddd" : "#ee5d47",
+            }}
+          >
+            SALVAR
+          </span>
         </div>
         <div className={styles.separator} />
       </div>
