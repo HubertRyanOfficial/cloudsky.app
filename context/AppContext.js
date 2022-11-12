@@ -15,12 +15,19 @@ const InitialState = {
 
 export const ACTIONS = {
   INITIAL_STATE: "INITIAL_STATE",
+  ADD_NEW_NOTE: "ADD_NEW_NOTE",
 };
 
 function appReducer(state, action) {
   switch (action.type) {
     case ACTIONS.INITIAL_STATE: {
       return { ...state, ...action.payload };
+    }
+    case ACTIONS.ADD_NEW_NOTE: {
+      return {
+        ...state,
+        notes: [...state.notes, action.payload],
+      };
     }
     default: {
       return state;
@@ -37,8 +44,26 @@ function useApp() {
 
   const [state, dispatch] = context;
 
+  const addNewNote = (note) => {
+    const id = state.notes.length + 1;
+
+    console.log({
+      ...note,
+      id,
+    });
+
+    dispatch({
+      type: ACTIONS.ADD_NEW_NOTE,
+      payload: {
+        ...note,
+        id,
+      },
+    });
+  };
+
   return {
     ...state,
+    addNewNote,
   };
 }
 
@@ -61,7 +86,7 @@ function AppProvider({ children }) {
     }
     setTimeout(() => {
       loadApp();
-    }, 3000);
+    }, 2500);
   }, []);
 
   return (

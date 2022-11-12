@@ -16,11 +16,9 @@ const Notes = () => {
 
   return (
     <div className={styles.container}>
-      <NoteItem />
-      <NoteItem />
-      <NoteItem />
-      <NoteItem />
-      <NoteItem />
+      {notes.map((item) => (
+        <NoteItem item={item} />
+      ))}
     </div>
   );
 };

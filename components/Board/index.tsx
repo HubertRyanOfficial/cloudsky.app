@@ -1,11 +1,23 @@
 import { useState } from "react";
 import styles from "./Board.module.css";
 
-interface Props {}
+import { useApp } from "../../context/AppContext";
 
-const Board = ({}: Props) => {
+const Board = () => {
+  const { addNewNote } = useApp();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  function handleAddNewNote() {
+    addNewNote({ title, content });
+    clearState();
+  }
+
+  function clearState() {
+    setTitle("");
+    setContent("");
+  }
 
   return (
     <div className={styles.container}>
@@ -18,8 +30,9 @@ const Board = ({}: Props) => {
             placeholder="Nova nota"
             onChange={(e) => setTitle(e.target.value)}
             autoCapitalize="words"
+            autoFocus
           />
-          <span>EXCLUIR</span>
+          <span onClick={() => handleAddNewNote()}>SALVAR</span>
         </div>
         <div className={styles.separator} />
       </div>

@@ -16,6 +16,7 @@
 .title {
   font-size: 22px;
   font-weight: 500;
+  line-break: strict;
 }
 
 .content {
