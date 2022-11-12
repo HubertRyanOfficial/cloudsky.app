@@ -47,11 +47,6 @@ function useApp() {
   const addNewNote = (note) => {
     const id = state.notes.length + 1;
 
-    console.log({
-      ...note,
-      id,
-    });
-
     dispatch({
       type: ACTIONS.ADD_NEW_NOTE,
       payload: {
@@ -74,13 +69,13 @@ function AppProvider({ children }) {
   useEffect(() => {
     async function loadApp() {
       const response = await localStorage.getItem("@younotyapp-notes");
-      const notes = JSON.parse(response);
+      const persistedData = await JSON.parse(response);
 
       dispatch({
         type: ACTIONS.INITIAL_STATE,
         payload: {
+          ...persistedData,
           isLoading: false,
-          notes: notes ?? [],
         },
       });
     }
@@ -88,6 +83,20 @@ function AppProvider({ children }) {
       loadApp();
     }, 2500);
   }, []);
+
+  useEffect(() => {
+    if (state.notes.length > 0) {
+      const newState = {
+        ...state,
+        isLoading: true,
+      };
+
+      console.log(newState);
+
+      const persistedState = JSON.stringify(newState);
+      localStorage.setItem("@younotyapp-notes", persistedState);
+    }
+  }, [state]);
 
   return (
     <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

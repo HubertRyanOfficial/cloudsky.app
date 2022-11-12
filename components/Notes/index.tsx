@@ -17,7 +17,7 @@ const Notes = () => {
   return (
     <div className={styles.container}>
       {notes.map((item) => (
-        <NoteItem item={item} />
+        <NoteItem key={item.id} item={item} />
       ))}
     </div>
   );
