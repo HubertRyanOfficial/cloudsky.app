@@ -1,13 +1,16 @@
+import { useApp } from "../../context/AppContext";
 import styles from "./Notes.module.css";
 
-interface Props {}
+interface NotesProps {
+  id: string;
+  title: string;
+  content: string;
+}
 
-const Notes = ({}: Props) => {
-  return (
-    <div className={styles.container}>
-      <h1>Notes</h1>
-    </div>
-  );
+const Notes = () => {
+  const { notes }: { notes: NotesProps[] } = useApp();
+
+  return <div className={styles.container}></div>;
 };
 
 export default Notes;
