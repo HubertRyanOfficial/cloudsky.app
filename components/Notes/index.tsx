@@ -12,6 +12,8 @@ interface NotesProps {
 const Notes = () => {
   const { notes }: { notes: NotesProps[] } = useApp();
 
+  return <EmptyState />;
+
   return (
     <div className={styles.container}>
       <NoteItem />
@@ -19,6 +21,17 @@ const Notes = () => {
       <NoteItem />
       <NoteItem />
       <NoteItem />
+    </div>
+  );
+};
+
+const EmptyState = () => {
+  return (
+    <div className={styles.emptyContainer}>
+      <span>
+        Aqui ficarão todas as suas notas. Comece a criar suas notas no lado
+        direito!
+      </span>
     </div>
   );
 };

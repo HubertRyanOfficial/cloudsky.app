@@ -1,3 +1,16 @@
 .container {
   width: 30%;
 }
+
+.emptyContainer {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.emptyContainer > span {
+  text-align: center;
+  color: var(--dark-gray);
+}
