@@ -32,7 +32,7 @@
 }
 
 .inputContent input::placeholder {
-  color: var(--dark-gray);
+  color: var(--gray);
 }
 
 .optionSave {
