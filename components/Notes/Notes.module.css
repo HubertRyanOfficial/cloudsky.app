@@ -12,6 +12,7 @@
   align-items: center;
   transition: opacity 0.2s;
   cursor: default;
+  border-radius: 200px;
 }
 
 .newNote:hover {
