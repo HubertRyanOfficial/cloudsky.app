@@ -3,6 +3,8 @@ import styles from "./Board.module.css";
 
 import { useApp } from "../../context/AppContext";
 
+import SelectTag from "../SelectTag";
+
 const Board = () => {
   const { addNewNote, editNote, selected, removeNote } = useApp();
 
@@ -34,6 +36,7 @@ const Board = () => {
 
   return (
     <div className={styles.container}>
+      <SelectTag />
       <div className={styles.inputContainer}>
         <div className={styles.inputContent}>
           <input
@@ -53,14 +56,14 @@ const Board = () => {
                 color: !title && !content ? "#ddd" : "#ee5d47",
               }}
             >
-              SALVAR
+              Salvar
             </span>
             {selected && (
               <span
                 onClick={() => removeNote(selected.id)}
                 className={styles.optionDelete}
               >
-                EXCLUIR
+                Excluir
               </span>
             )}
           </div>

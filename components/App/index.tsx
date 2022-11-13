@@ -28,7 +28,6 @@ export default function App() {
 function Loading() {
   return (
     <div className={styles.loadingContainer}>
-      <Image width={200} src={Logo} alt="YouNoty" priority={true} />
       <Player src={LoadingAnimation} autoplay loop style={{ width: 300 }} />
     </div>
   );

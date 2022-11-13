@@ -9,11 +9,15 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>YouNoty | Suas notas offline</title>
+        <title>
+          Cloudsky - Suas ideias, notas e projetos, seu lugar para a
+          organização.
+        </title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Suas notas, ideias em um local seguro e sem servidor."
+          content="Suas ideias, notas e projetos, seu lugar para a
+          organização."
         />
       </Head>
 

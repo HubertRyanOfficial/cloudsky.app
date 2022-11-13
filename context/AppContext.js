@@ -12,6 +12,7 @@ const InitialState = {
   isLoading: true,
   notes: [],
   selected: null,
+  tags: [],
 };
 
 export const ACTIONS = {
