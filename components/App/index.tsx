@@ -6,8 +6,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import Notes from "../Notes";
 import Board from "../Board";
 
-import Logo from "../../public/logo.png";
-import LoadingAnimation from "../../public/animations/98092-loading.json";
+import LoadingAnimation from "../../animations/98092-loading.json";
 import { useApp } from "../../context/AppContext";
 
 export default function App() {
