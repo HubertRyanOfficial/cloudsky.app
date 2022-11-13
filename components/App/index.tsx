@@ -10,7 +10,7 @@ import { useApp } from "../../context/AppContext";
 export default function App() {
   const { isLoading } = useApp();
 
-  return <Loading />;
+  if (isLoading) return <Loading />;
 
   return (
     <main className={styles.main}>
