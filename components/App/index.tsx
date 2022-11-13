@@ -1,7 +1,6 @@
-import Image from "next/image";
 import styles from "./App.module.css";
 
-import { Player } from "@lottiefiles/react-lottie-player";
+import Lottie from "react-lottie-player";
 
 import Notes from "../Notes";
 import Board from "../Board";
@@ -12,9 +11,7 @@ import { useApp } from "../../context/AppContext";
 export default function App() {
   const { isLoading } = useApp();
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
   return (
     <main className={styles.main}>
@@ -27,7 +24,12 @@ export default function App() {
 function Loading() {
   return (
     <div className={styles.loadingContainer}>
-      <Player src={LoadingAnimation} autoplay loop style={{ width: 300 }} />
+      <Lottie
+        animationData={LoadingAnimation}
+        play
+        loop
+        style={{ width: 300 }}
+      />
     </div>
   );
 }
