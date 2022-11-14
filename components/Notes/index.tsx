@@ -9,6 +9,8 @@ interface NotesProps {
   id: string;
   title: string;
   content: string;
+  new: boolean;
+  color: string;
 }
 
 const Notes = () => {
