@@ -1,0 +1,19 @@
+.container {
+  background-color: var(--light-red);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  width: 200px;
+  cursor: default;
+  transition: opacity 0.3s;
+}
+
+.container > span {
+  font-size: 16px;
+}
+
+.container:hover {
+  opacity: 0.4;
+}

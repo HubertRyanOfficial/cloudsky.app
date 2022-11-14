@@ -11,7 +11,15 @@
 
   display: flex;
   flex: 1;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
+}
+
+.loadingContainer > span {
+  font-weight: 800;
+  font-size: 3rem;
+  color: var(--red);
 }

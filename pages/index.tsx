@@ -3,17 +3,25 @@ import Head from "next/head";
 import { AppProvider } from "../context/AppContext";
 
 import App from "../components/App";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div
+      style={{
+        padding: 0,
+        margin: 0,
+      }}
+    >
       <Head>
-        <title>YouNoty | Suas notas offline</title>
+        <title>
+          Cloudsky - Suas ideias, notas e projetos, seu lugar para a
+          organização.
+        </title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Suas notas, ideias em um local seguro e sem servidor."
+          content="Suas ideias, notas e projetos, seu lugar para a
+          organização."
         />
       </Head>
 

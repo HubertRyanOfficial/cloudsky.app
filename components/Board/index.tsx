@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./Board.module.css";
 
+import { motion } from "framer-motion";
 import { useApp } from "../../context/AppContext";
+
+import SelectTag from "../SelectTag";
 
 const Board = () => {
   const { addNewNote, editNote, selected, removeNote } = useApp();
@@ -34,6 +37,7 @@ const Board = () => {
 
   return (
     <div className={styles.container}>
+      <SelectTag />
       <div className={styles.inputContainer}>
         <div className={styles.inputContent}>
           <input
@@ -46,22 +50,22 @@ const Board = () => {
             autoFocus
           />
           <div className={styles.options}>
-            <span
+            <motion.span
               onClick={() => handleAddNewNote()}
               className={styles.optionSave}
               style={{
                 color: !title && !content ? "#ddd" : "#ee5d47",
               }}
             >
-              SALVAR
-            </span>
+              Salvar
+            </motion.span>
             {selected && (
-              <span
+              <motion.span
                 onClick={() => removeNote(selected.id)}
                 className={styles.optionDelete}
               >
-                EXCLUIR
-              </span>
+                Excluir
+              </motion.span>
             )}
           </div>
         </div>

@@ -20,7 +20,7 @@ const Notes = () => {
   return (
     <div className={styles.container}>
       <div className={styles.newNote} onClick={() => forceNewNote()}>
-        <strong>NOVA NOTA</strong>
+        <strong>Criar uma nova nota</strong>
       </div>
       {notes.map((item) => (
         <NoteItem key={item.id} item={item} />
