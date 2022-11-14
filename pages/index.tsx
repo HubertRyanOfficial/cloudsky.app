@@ -3,11 +3,15 @@ import Head from "next/head";
 import { AppProvider } from "../context/AppContext";
 
 import App from "../components/App";
-import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div
+      style={{
+        padding: 0,
+        margin: 0,
+      }}
+    >
       <Head>
         <title>
           Cloudsky - Suas ideias, notas e projetos, seu lugar para a
