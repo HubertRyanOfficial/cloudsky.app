@@ -63,7 +63,7 @@ export default function SelectTag() {
           className={styles.tagsContainer}
         >
           {tags.map((tagItem: any) => (
-            <TagItem name={tagItem.name} />
+            <TagItem key={tagItem.id} name={tagItem.name} />
           ))}
         </motion.div>
       )}
