@@ -95,6 +95,7 @@ function useApp() {
       type: ACTIONS.ADD_NEW_NOTE,
       payload: {
         ...note,
+        new: true,
         id,
       },
     });
@@ -146,7 +147,14 @@ function AppProvider({ children }) {
   useEffect(() => {
     async function loadApp() {
       const response = await localStorage.getItem("@younotyapp-notes");
-      const persistedData = await JSON.parse(response);
+      let persistedData = await JSON.parse(response);
+
+      if (persistedData?.notes.length > 0) {
+        persistedData.notes = persistedData.notes.map((item) => ({
+          ...item,
+          new: false,
+        }));
+      }
 
       dispatch({
         type: ACTIONS.INITIAL_STATE,

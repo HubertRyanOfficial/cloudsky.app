@@ -22,8 +22,8 @@ const Notes = () => {
       <div className={styles.newNote} onClick={() => forceNewNote()}>
         <strong>Criar uma nova nota</strong>
       </div>
-      {notes.map((item) => (
-        <NoteItem key={item.id} item={item} />
+      {notes.map((item, index) => (
+        <NoteItem key={item.id} item={item} index={index} />
       ))}
     </div>
   );

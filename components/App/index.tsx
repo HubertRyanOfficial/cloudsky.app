@@ -23,7 +23,7 @@ export default function App() {
 function Loading() {
   return (
     <div className={styles.loadingContainer}>
-      <motion.span
+      <motion.h1
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 2.5 }}
         drag
@@ -33,7 +33,7 @@ function Loading() {
         transition={{ duration: 1, type: "spring" }}
       >
         Cloudsky
-      </motion.span>
+      </motion.h1>
     </div>
   );
 }

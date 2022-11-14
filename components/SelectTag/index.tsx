@@ -9,12 +9,12 @@ export default function SelectTag() {
   return (
     <div>
       <motion.div
-        initial={{ opacity: 0, width: 150 }}
-        animate={{ width: [150, 200], opacity: 1 }}
+        initial={{ opacity: 0, width: 180 }}
+        animate={{ width: [180, 200], opacity: 1 }}
         whileTap={{ scale: 0.9 }}
         className={styles.container}
       >
-        <span>Selecionar tag</span>
+        <span>Selecionar projeto</span>
       </motion.div>
     </div>
   );

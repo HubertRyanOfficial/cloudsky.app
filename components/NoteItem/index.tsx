@@ -1,20 +1,30 @@
 import { useApp } from "../../context/AppContext";
 import styles from "./NoteItem.module.css";
 
+import { motion } from "framer-motion";
+
 interface Props {
   item: {
     id: string;
     title: string;
     content: string;
+    new: boolean;
   };
+  index: number;
 }
 
-const NoteItem = ({ item }: Props) => {
+const NoteItem = ({ item, index }: Props) => {
   const { selectNote } = useApp();
   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
   return (
-    <div className={styles.container} onClick={() => selectNote(item.id)}>
+    <motion.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: item.new ? 0 : index / 5 }}
+      className={styles.container}
+      onClick={() => selectNote(item.id)}
+    >
       <div
         className={styles.indentifier}
         style={{ backgroundColor: `#${randomColor}` }}
@@ -34,7 +44,7 @@ const NoteItem = ({ item }: Props) => {
             : item.content}
         </span>
       )}
-    </div>
+    </motion.div>
   );
 };
 
