@@ -90,12 +90,14 @@ function useApp() {
 
   const addNewNote = (note) => {
     const id = state.notes.length + 1;
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
     dispatch({
       type: ACTIONS.ADD_NEW_NOTE,
       payload: {
         ...note,
         new: true,
+        color: randomColor,
         id,
       },
     });

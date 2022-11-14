@@ -9,25 +9,25 @@ interface Props {
     title: string;
     content: string;
     new: boolean;
+    color: string;
   };
   index: number;
 }
 
 const NoteItem = ({ item, index }: Props) => {
   const { selectNote } = useApp();
-  const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: item.new ? 0 : index / 5 }}
+      transition={{ delay: item.new ? 0 : index / 10 }}
       className={styles.container}
       onClick={() => selectNote(item.id)}
     >
       <div
         className={styles.indentifier}
-        style={{ backgroundColor: `#${randomColor}` }}
+        style={{ backgroundColor: `#${item.color}` }}
       />
       <strong
         className={styles.title}
