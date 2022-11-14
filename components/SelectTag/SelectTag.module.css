@@ -1,11 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .container {
   background-color: var(--light-red);
-  padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100px;
   width: 200px;
+  height: 40px;
   cursor: default;
   transition: opacity 0.3s;
 }
@@ -16,4 +22,26 @@
 
 .container:hover {
   opacity: 0.4;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.tagItem {
+  margin-right: 20px;
+  cursor: default;
+}
+
+.tagItem > strong {
+  font-weight: 400;
+  color: var(--dark-gray);
+  transition: all 0.3s;
+}
+
+.tagItem > strong:hover {
+  font-weight: 600;
 }
