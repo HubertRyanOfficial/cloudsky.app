@@ -1,6 +1,8 @@
 import { useApp } from "../../context/AppContext";
 import styles from "./Notes.module.css";
 
+import { motion } from "framer-motion";
+
 import NoteItem from "../NoteItem";
 
 interface NotesProps {
@@ -19,9 +21,22 @@ const Notes = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.newNote} onClick={() => forceNewNote()}>
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: -20,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{ duration: 0.3 }}
+        className={styles.newNote}
+        onClick={() => forceNewNote()}
+      >
         <strong>Criar uma nova nota</strong>
-      </div>
+      </motion.div>
+
       {notes.map((item, index) => (
         <NoteItem key={item.id} item={item} index={index} />
       ))}

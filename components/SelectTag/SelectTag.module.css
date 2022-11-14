@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .tagItem {
@@ -44,4 +44,47 @@
 
 .tagItem > strong:hover {
   font-weight: 600;
+  color: var(--black);
+}
+
+.newProject {
+  background-color: var(--light-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  width: 200px;
+  height: 40px;
+  cursor: default;
+  transition: opacity 0.3s;
+  margin-left: 20px;
+}
+
+.newProject span {
+  color: var(--red);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.newProject > input {
+  outline: none;
+  border: 0;
+  background-color: var(--light-red);
+  font-family: "Work Sans";
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--black);
+  width: 80%;
+}
+
+.newProjectConfirm {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid var(--red);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
 }

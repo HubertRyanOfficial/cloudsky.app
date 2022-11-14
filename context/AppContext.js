@@ -22,6 +22,7 @@ export const ACTIONS = {
   REMOVE_NOTE: "REMOVE_NOTE",
   SELECT_NOTE: "SELECT_NOTE",
   FORCE_NEW_NOTE: "FORCE_NEW_NOTE",
+  CREATE_NEW_TAG: "CREATE_NEW_TAG",
 };
 
 function appReducer(state, action) {
@@ -71,6 +72,12 @@ function appReducer(state, action) {
       return {
         ...state,
         selected: null,
+      };
+    }
+    case ACTIONS.CREATE_NEW_TAG: {
+      return {
+        ...state,
+        tags: [...state.tags, action.payload],
       };
     }
     default: {
@@ -132,6 +139,18 @@ function useApp() {
     });
   };
 
+  const createNewTag = (name) => {
+    const id = state.tags.length + 1;
+
+    dispatch({
+      type: ACTIONS.CREATE_NEW_TAG,
+      payload: {
+        id,
+        name,
+      },
+    });
+  };
+
   return {
     ...state,
     addNewNote,
@@ -139,6 +158,7 @@ function useApp() {
     removeNote,
     selectNote,
     forceNewNote,
+    createNewTag,
   };
 }
 
@@ -148,7 +168,7 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     async function loadApp() {
-      const response = await localStorage.getItem("@younotyapp-notes");
+      const response = await localStorage.getItem("@cloudsky-general-storage");
       let persistedData = await JSON.parse(response);
 
       if (persistedData?.notes.length > 0) {
@@ -178,7 +198,7 @@ function AppProvider({ children }) {
         isLoading: true,
       };
       const persistedState = JSON.stringify(newState);
-      localStorage.setItem("@younotyapp-notes", persistedState);
+      localStorage.setItem("@cloudsky-general-storage", persistedState);
     }
   }, [state]);
 

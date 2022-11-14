@@ -1,11 +1,33 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-import { BiX } from "react-icons/bi";
+import { useApp } from "../../context/AppContext";
+
+import { BiX, BiCheck } from "react-icons/bi";
 import styles from "./SelectTag.module.css";
 
 export default function SelectTag() {
+  const { createNewTag, tags } = useApp();
+
   const [showTags, setShowTags] = useState(false);
+  const [newProject, setNewProject] = useState(false);
+  const [newProjectName, setNewProjectName] = useState<string>();
+
+  function handleSelectNewProject() {
+    setShowTags(!showTags);
+    if (newProject) {
+      setNewProject(false);
+      setNewProjectName("");
+    }
+  }
+
+  function handleCreateNewProject() {
+    if (!newProjectName) return;
+
+    createNewTag(newProjectName);
+    setNewProject(false);
+    setNewProjectName("");
+  }
 
   return (
     <div className={styles.content}>
@@ -17,7 +39,7 @@ export default function SelectTag() {
         }}
         whileTap={{ scale: 0.9 }}
         className={styles.container}
-        onClick={() => setShowTags(!showTags)}
+        onClick={() => handleSelectNewProject()}
       >
         {!showTags ? (
           <motion.span
@@ -30,24 +52,69 @@ export default function SelectTag() {
           <BiX size={22} color="#ff4f4b" />
         )}
       </motion.div>
+
+      {!newProject && (
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{
+            opacity: showTags && !newProject ? 1 : 0,
+            x: showTags && !newProject ? 0 : -20,
+          }}
+          className={styles.tagsContainer}
+        >
+          {tags.map((tagItem: any) => (
+            <TagItem name={tagItem.name} />
+          ))}
+        </motion.div>
+      )}
+
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: showTags ? 1 : 0, x: showTags ? 0 : -20 }}
-        className={styles.tagsContainer}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: !showTags ? 0 : 1,
+        }}
+        className={styles.newProject}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setNewProject(true)}
       >
-        <TagItem />
-        <TagItem />
-        <TagItem />
-        <TagItem />
+        {!newProject ? (
+          <span>Novo projeto</span>
+        ) : (
+          <input
+            value={newProjectName}
+            autoFocus
+            onChange={(e) => setNewProjectName(e.target.value)}
+          />
+        )}
       </motion.div>
+
+      {newProject && (
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -20,
+          }}
+          whileTap={{ scale: 0.9 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+          }}
+          className={styles.newProjectConfirm}
+          onClick={() => handleCreateNewProject()}
+        >
+          <BiCheck size={22} color="#ff4f4b" />
+        </motion.div>
+      )}
     </div>
   );
 }
 
-function TagItem() {
+function TagItem({ name }: { name: string }) {
   return (
     <div className={styles.tagItem}>
-      <strong>Tapedin</strong>
+      <strong>{name}</strong>
     </div>
   );
 }
