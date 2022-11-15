@@ -105,23 +105,28 @@ export default function SelectTag() {
         )}
       </AnimatePresence>
 
-      {newProject && (
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: -20,
-          }}
-          whileTap={{ scale: 0.9 }}
-          animate={{
-            opacity: 1,
-            x: 0,
-          }}
-          className={styles.newProjectConfirm}
-          onClick={() => handleCreateNewProject()}
-        >
-          <BiCheck size={22} color="#ff4f4b" />
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {newProject && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -20,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            whileTap={{ scale: 0.9 }}
+            className={styles.newProjectConfirm}
+            onClick={() => handleCreateNewProject()}
+          >
+            <BiCheck size={22} color="#ff4f4b" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
