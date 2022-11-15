@@ -31,7 +31,10 @@ export default function SelectTag() {
   }
 
   function handleSelectTag(tag: any) {
-    selectTag(tag);
+    if (tag?.id != tagSelected?.id) {
+      selectTag(tag);
+    }
+
     setNewProject(false);
     setShowTags(false);
   }
@@ -58,6 +61,7 @@ export default function SelectTag() {
             transition={{ delay: 0.5 }}
             style={{
               color: !!tagSelected ? "#ff4f4b" : "#000",
+              fontWeight: !!tagSelected ? 500 : 400,
             }}
           >
             {!!tagSelected ? tagSelected?.name : "Selecionar projeto"}
@@ -144,11 +148,34 @@ export default function SelectTag() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AnimatePresence>
+        {showTags && !newProject && tagSelected && (
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            whileHover={{ opacity: 0.5 }}
+            whileTap={{ scale: 0.9 }}
+            className={styles.clearContent}
+            onClick={() => handleSelectTag(null)}
+          >
+            Limpar
+          </motion.span>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-function TagItem({ name, onClick }: { name: string; onClick: () => null }) {
+function TagItem({ name, onClick }: { name: string; onClick: any }) {
   return (
     <div className={styles.tagItem} onClick={onClick}>
       <strong>{name}</strong>
