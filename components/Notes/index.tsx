@@ -32,7 +32,7 @@ const Notes = () => {
           opacity: 1,
           y: 0,
         }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
         className={styles.newNote}
         onClick={() => forceNewNote()}
       >
