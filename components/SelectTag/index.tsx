@@ -37,6 +37,9 @@ export default function SelectTag() {
           width: [!showTags ? 40 : 200, !showTags ? 200 : 40],
           opacity: 1,
         }}
+        transition={{
+          duration: 0.5,
+        }}
         whileTap={{ scale: 0.9 }}
         className={styles.container}
         onClick={() => handleSelectNewProject()}
