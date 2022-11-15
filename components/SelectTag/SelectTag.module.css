@@ -31,8 +31,14 @@
   margin-left: 40px;
 }
 
-.tagItem {
+.tagItemContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-right: 20px;
+}
+
+.tagItem {
   cursor: default;
 }
 
@@ -45,6 +51,12 @@
 .tagItem > strong:hover {
   font-weight: 600;
   color: var(--black);
+}
+
+.tagItemContent > span {
+  color: var(--dark-gray);
+  margin-left: 20px;
+  font-size: 10px;
 }
 
 .newProject {

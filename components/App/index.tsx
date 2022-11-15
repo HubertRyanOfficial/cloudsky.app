@@ -27,7 +27,7 @@ function Loading() {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 2.5 }}
         drag
-        dragConstraints={{ bottom: 50, left: 50, right: 50, top: 50 }}
+        dragConstraints={{ bottom: 0, left: 0, right: 0, top: 0 }}
         whileHover={{ scale: 2.2 }}
         whileDrag={{ opacity: 0.8 }}
         transition={{ duration: 1, type: "spring" }}
