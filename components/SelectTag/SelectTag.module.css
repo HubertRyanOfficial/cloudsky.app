@@ -95,8 +95,15 @@
 }
 
 .clearContent {
-  font-size: 16px;
-  margin-left: 20px;
+  margin-left: 10px;
   color: var(--dark-gray);
   cursor: default;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--red);
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
