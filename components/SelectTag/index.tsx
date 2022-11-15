@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useApp } from "../../context/AppContext";
 
@@ -34,7 +34,7 @@ export default function SelectTag() {
       <motion.div
         initial={{ opacity: 0, width: 180, height: 40 }}
         animate={{
-          width: [!showTags ? 180 : 200, !showTags ? 200 : 40],
+          width: [!showTags ? 40 : 200, !showTags ? 200 : 40],
           opacity: 1,
         }}
         whileTap={{ scale: 0.9 }}
@@ -45,6 +45,7 @@ export default function SelectTag() {
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: !showTags ? 1 : 0 }}
+            transition={{ delay: 0.5 }}
           >
             Selecionar projeto
           </motion.span>
@@ -53,42 +54,56 @@ export default function SelectTag() {
         )}
       </motion.div>
 
-      {!newProject && (
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{
-            opacity: showTags && !newProject ? 1 : 0,
-            x: showTags && !newProject ? 0 : -20,
-          }}
-          className={styles.tagsContainer}
-        >
-          {tags.map((tagItem: any) => (
-            <TagItem key={tagItem.id} name={tagItem.name} />
-          ))}
-        </motion.div>
-      )}
-
-      <motion.div
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: !showTags ? 0 : 1,
-        }}
-        className={styles.newProject}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setNewProject(true)}
-      >
-        {!newProject ? (
-          <span>Novo projeto</span>
-        ) : (
-          <input
-            value={newProjectName}
-            autoFocus
-            onChange={(e) => setNewProjectName(e.target.value)}
-          />
+      <AnimatePresence>
+        {!newProject && showTags && (
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{
+              opacity: 0,
+              x: -20,
+            }}
+            className={styles.tagsContainer}
+          >
+            {tags.map((tagItem: any) => (
+              <TagItem key={tagItem.id} name={tagItem.name} />
+            ))}
+          </motion.div>
         )}
-      </motion.div>
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showTags && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className={styles.newProject}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setNewProject(true)}
+          >
+            {!newProject ? (
+              <span>Novo projeto</span>
+            ) : (
+              <input
+                value={newProjectName}
+                autoFocus
+                onChange={(e) => setNewProjectName(e.target.value)}
+                maxLength={40}
+              />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {newProject && (
         <motion.div

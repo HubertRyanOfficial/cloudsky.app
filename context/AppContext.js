@@ -167,7 +167,7 @@ function AppProvider({ children }) {
   const contextValues = useMemo(() => [state, dispatch], [state]);
 
   useEffect(() => {
-    // localStorage.removeItem("@cloudsky-general-storage");
+    localStorage.removeItem("@cloudsky-general-storage");
 
     async function loadApp() {
       const response = await localStorage.getItem("@cloudsky-general-storage");

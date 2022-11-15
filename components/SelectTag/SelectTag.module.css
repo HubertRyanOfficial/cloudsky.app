@@ -28,18 +28,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 40px;
-}
-
-.tagItemContent {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 20px;
 }
 
 .tagItem {
   cursor: default;
+  margin-left: 20px;
 }
 
 .tagItem > strong {
