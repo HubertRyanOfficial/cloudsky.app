@@ -7,7 +7,7 @@ import { BiX, BiCheck } from "react-icons/bi";
 import styles from "./SelectTag.module.css";
 
 export default function SelectTag() {
-  const { createNewTag, tags } = useApp();
+  const { createNewTag, tags, tagSelected, selectTag } = useApp();
 
   const [showTags, setShowTags] = useState(false);
   const [newProject, setNewProject] = useState(false);
@@ -26,7 +26,14 @@ export default function SelectTag() {
 
     createNewTag(newProjectName);
     setNewProject(false);
+    setShowTags(false);
     setNewProjectName("");
+  }
+
+  function handleSelectTag(tag: any) {
+    selectTag(tag);
+    setNewProject(false);
+    setShowTags(false);
   }
 
   return (
@@ -49,8 +56,11 @@ export default function SelectTag() {
             initial={{ opacity: 0 }}
             animate={{ opacity: !showTags ? 1 : 0 }}
             transition={{ delay: 0.5 }}
+            style={{
+              color: !!tagSelected ? "#ff4f4b" : "#000",
+            }}
           >
-            Selecionar projeto
+            {!!tagSelected ? tagSelected?.name : "Selecionar projeto"}
           </motion.span>
         ) : (
           <BiX size={22} color="#ff4f4b" />
@@ -72,7 +82,11 @@ export default function SelectTag() {
             className={styles.tagsContainer}
           >
             {tags.map((tagItem: any) => (
-              <TagItem key={tagItem.id} name={tagItem.name} />
+              <TagItem
+                key={tagItem.id}
+                name={tagItem.name}
+                onClick={() => handleSelectTag(tagItem)}
+              />
             ))}
           </motion.div>
         )}
@@ -134,9 +148,9 @@ export default function SelectTag() {
   );
 }
 
-function TagItem({ name }: { name: string }) {
+function TagItem({ name, onClick }: { name: string; onClick: () => null }) {
   return (
-    <div className={styles.tagItem}>
+    <div className={styles.tagItem} onClick={onClick}>
       <strong>{name}</strong>
     </div>
   );

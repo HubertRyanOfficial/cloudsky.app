@@ -13,6 +13,7 @@ const InitialState = {
   notes: [],
   selected: null,
   tags: [],
+  tagSelected: null,
 };
 
 export const ACTIONS = {
@@ -23,6 +24,7 @@ export const ACTIONS = {
   SELECT_NOTE: "SELECT_NOTE",
   FORCE_NEW_NOTE: "FORCE_NEW_NOTE",
   CREATE_NEW_TAG: "CREATE_NEW_TAG",
+  SELECT_TAG: "SELECT_TAG",
 };
 
 function appReducer(state, action) {
@@ -78,6 +80,13 @@ function appReducer(state, action) {
       return {
         ...state,
         tags: [...state.tags, action.payload],
+        tagSelected: action.payload,
+      };
+    }
+    case ACTIONS.SELECT_TAG: {
+      return {
+        ...state,
+        tagSelected: action.payload,
       };
     }
     default: {
@@ -151,6 +160,13 @@ function useApp() {
     });
   };
 
+  const selectTag = (tag) => {
+    dispatch({
+      type: ACTIONS.SELECT_TAG,
+      payload: tag,
+    });
+  };
+
   return {
     ...state,
     addNewNote,
@@ -159,6 +175,7 @@ function useApp() {
     selectNote,
     forceNewNote,
     createNewTag,
+    selectTag,
   };
 }
 
