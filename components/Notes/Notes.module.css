@@ -63,4 +63,5 @@
   font-size: 22px;
   font-weight: 500;
   color: var(--black);
+  flex: 1;
 }

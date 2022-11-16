@@ -3,8 +3,9 @@ import styles from "./Notes.module.css";
 
 import { motion } from "framer-motion";
 
-import NoteItem from "../NoteItem";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 
+import NoteItem from "../NoteItem";
 import { NoteItemProps } from "../NoteItem";
 
 interface NotesProps {
@@ -72,10 +73,15 @@ const Notes = () => {
 
 const NoteGroupTitle = ({ title }: { title: string }) => {
   return (
-    <div className={styles.notesGroupTitle}>
+    <motion.div className={styles.notesGroupTitle} whileTap={{ scale: 0.9 }}>
       <div className={styles.notesGroupTitleCircle} />
       <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
-    </div>
+      <BiDotsHorizontalRounded
+        size={25}
+        color={"#dddddd"}
+        style={{ marginRight: 20 }}
+      />
+    </motion.div>
   );
 };
 
