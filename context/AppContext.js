@@ -35,8 +35,6 @@ export const ACTIONS = {
 };
 
 function appReducer(state, action) {
-  console.log(state);
-
   switch (action.type) {
     case ACTIONS.INITIAL_STATE: {
       return { ...state, ...action.payload };
@@ -65,6 +63,7 @@ function appReducer(state, action) {
         ...state,
         notes,
         total: state.total + 1,
+        tagSelected: null,
       };
     }
     case ACTIONS.EDIT_NOTE: {
@@ -136,14 +135,11 @@ function useApp() {
 
   const addNewNote = (note) => {
     const id = state.notes.length + 1;
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
     dispatch({
       type: ACTIONS.ADD_NEW_NOTE,
       payload: {
         ...note,
         new: true,
-        color: randomColor,
         id,
       },
     });

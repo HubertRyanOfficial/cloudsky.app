@@ -36,3 +36,31 @@
   color: var(--dark-gray);
   margin: 50px;
 }
+
+.notesGroup {
+  margin-left: 20px;
+}
+
+.notesGroupTitle {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.notesGroupTitleCircle {
+  width: 8px;
+  height: 8px;
+  background-color: var(--red);
+  border-radius: 4px;
+}
+
+.notesGroupTitle > span {
+  margin-left: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--black);
+}

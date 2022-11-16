@@ -23,14 +23,11 @@ const NoteItem = ({ item, index }: Props) => {
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
+      whileTap={{ scale: 0.9 }}
       transition={{ delay: item.new ? 0 : index / 10, duration: 0.4 }}
       className={styles.container}
       onClick={() => selectNote(item.id)}
     >
-      <div
-        className={styles.indentifier}
-        style={{ backgroundColor: `#${item.color}` }}
-      />
       <strong
         className={styles.title}
         style={{

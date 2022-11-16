@@ -49,9 +49,7 @@ const Notes = () => {
         if (item.tag)
           return (
             <div key={item.id}>
-              <div className={styles.notesGroupTitle}>
-                <span>{item.tag.name}</span>
-              </div>
+              <NoteGroupTitle title={item.tag.name} />
               <div className={styles.notesGroup}>
                 {item.notes.map((noteItem: NoteItemProps, index) => (
                   <NoteItem key={noteItem.id} item={noteItem} index={index} />
@@ -61,13 +59,22 @@ const Notes = () => {
           );
 
         return (
-          <div key={item.id} className={styles.notesGroup}>
+          <div key={item.id}>
             {item.notes.map((noteItem: NoteItemProps, index) => (
               <NoteItem key={noteItem.id} item={noteItem} index={index} />
             ))}
           </div>
         );
       })}
+    </div>
+  );
+};
+
+const NoteGroupTitle = ({ title }: { title: string }) => {
+  return (
+    <div className={styles.notesGroupTitle}>
+      <div className={styles.notesGroupTitleCircle} />
+      <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
     </div>
   );
 };
