@@ -5,21 +5,26 @@ import { motion } from "framer-motion";
 
 import NoteItem from "../NoteItem";
 
+import { NoteItemProps } from "../NoteItem";
+
 interface NotesProps {
   id: string;
-  title: string;
-  content: string;
-  new: boolean;
-  color: string;
+  tag: {
+    id: string;
+    name: string;
+  };
+  notes: NoteItemProps[];
 }
 
 const Notes = () => {
   const {
     notes,
     forceNewNote,
-  }: { notes: NotesProps[]; forceNewNote: () => void } = useApp();
+    total,
+  }: { notes: NotesProps[]; forceNewNote: () => void; total: number } =
+    useApp();
 
-  if (notes.length == 0) return <EmptyState />;
+  if (total == 0) return <EmptyState />;
 
   return (
     <div className={styles.container}>
@@ -39,9 +44,30 @@ const Notes = () => {
         <strong>Criar uma nova nota</strong>
       </motion.div>
 
-      {notes.map((item, index) => (
-        <NoteItem key={item.id} item={item} index={index} />
-      ))}
+      {notes.map((item) => {
+        if (item.notes.length == 0) return null;
+        if (item.tag)
+          return (
+            <>
+              <div className={styles.notesGroupTitle}>
+                <span>{item.tag.name}</span>
+              </div>
+              <div className={styles.notesGroup}>
+                {item.notes.map((noteItem: NoteItemProps, index) => (
+                  <NoteItem key={noteItem.id} item={noteItem} index={index} />
+                ))}
+              </div>
+            </>
+          );
+
+        return (
+          <div className={styles.notesGroup}>
+            {item.notes.map((noteItem: NoteItemProps, index) => (
+              <NoteItem key={noteItem.id} item={noteItem} index={index} />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 };

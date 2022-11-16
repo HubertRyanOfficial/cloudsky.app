@@ -10,10 +10,17 @@ const AppContext = createContext(null);
 
 const InitialState = {
   isLoading: true,
-  notes: [],
+  notes: [
+    {
+      id: 1,
+      tag: null,
+      notes: [],
+    },
+  ],
   selected: null,
   tags: [],
   tagSelected: null,
+  total: 0,
 };
 
 export const ACTIONS = {
@@ -33,9 +40,23 @@ function appReducer(state, action) {
       return { ...state, ...action.payload };
     }
     case ACTIONS.ADD_NEW_NOTE: {
+      let notes = [...state.notes];
+
+      let index = !!state.tagsSelected
+        ? state.notes.findIndex((item) => item.id == state.tagSelected.id)
+        : 0;
+
+      notes[index] = {
+        ...notes[index],
+        notes: [...notes[index].notes, action.payload],
+      };
+
+      console.log(notes);
+
       return {
         ...state,
-        notes: [...state.notes, action.payload],
+        notes,
+        total: state.total + 1,
       };
     }
     case ACTIONS.EDIT_NOTE: {
@@ -68,6 +89,7 @@ function appReducer(state, action) {
         ...state,
         notes,
         selected: null,
+        total: state.total - 1,
       };
     }
     case ACTIONS.FORCE_NEW_NOTE: {

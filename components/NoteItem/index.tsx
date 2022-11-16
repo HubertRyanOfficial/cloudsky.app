@@ -3,14 +3,16 @@ import styles from "./NoteItem.module.css";
 
 import { motion } from "framer-motion";
 
+export interface NoteItemProps {
+  id: string;
+  title: string;
+  content: string;
+  new: boolean;
+  color: string;
+}
+
 interface Props {
-  item: {
-    id: string;
-    title: string;
-    content: string;
-    new: boolean;
-    color: string;
-  };
+  item: NoteItemProps;
   index: number;
 }
 
