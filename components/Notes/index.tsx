@@ -78,7 +78,7 @@ const NoteGroupTitle = ({ title }: { title: string }) => {
       <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
       <BiDotsHorizontalRounded
         size={25}
-        color={"#dddddd"}
+        color="#dddddd"
         style={{ marginRight: 20 }}
       />
     </motion.div>
