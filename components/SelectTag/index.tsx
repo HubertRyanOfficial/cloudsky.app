@@ -146,6 +146,9 @@ export default function SelectTag() {
                 autoFocus
                 onChange={(e) => setNewProjectName(e.target.value)}
                 maxLength={40}
+                onKeyDown={(e) =>
+                  e.key == "Enter" ? handleCreateNewProject() : null
+                }
               />
             )}
           </motion.div>

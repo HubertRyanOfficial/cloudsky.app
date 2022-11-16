@@ -48,6 +48,7 @@ const Board = () => {
             onChange={(e) => setTitle(e.target.value)}
             autoCapitalize="words"
             autoFocus
+            onKeyDown={(e) => (e.key == "Enter" ? handleAddNewNote() : null)}
           />
           <div className={styles.options}>
             <motion.span
