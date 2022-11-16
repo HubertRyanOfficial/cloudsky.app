@@ -15,7 +15,10 @@ export default function SelectTag() {
 
   function handleSelectNewProject() {
     setShowTags(!showTags);
-    if (newProject) {
+
+    if (!newProject && tags.length == 1) {
+      setNewProject(true);
+    } else if (newProject) {
       setNewProject(false);
       setNewProjectName("");
     }
