@@ -161,10 +161,10 @@ function useApp() {
     });
   };
 
-  const selectNote = (id) => {
+  const selectNote = (note) => {
     dispatch({
       type: ACTIONS.SELECT_NOTE,
-      payload: id,
+      payload: note,
     });
   };
 

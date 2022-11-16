@@ -26,7 +26,7 @@ const NoteItem = ({ item, index }: Props) => {
       whileTap={{ scale: 0.9 }}
       transition={{ delay: item.new ? 0 : index / 10, duration: 0.4 }}
       className={styles.container}
-      onClick={() => selectNote(item.id)}
+      onClick={() => selectNote(item)}
     >
       <strong
         className={styles.title}
