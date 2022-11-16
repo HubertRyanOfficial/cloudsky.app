@@ -48,7 +48,7 @@ const Notes = () => {
         if (item.notes.length == 0) return null;
         if (item.tag)
           return (
-            <>
+            <div key={item.id}>
               <div className={styles.notesGroupTitle}>
                 <span>{item.tag.name}</span>
               </div>
@@ -57,11 +57,11 @@ const Notes = () => {
                   <NoteItem key={noteItem.id} item={noteItem} index={index} />
                 ))}
               </div>
-            </>
+            </div>
           );
 
         return (
-          <div className={styles.notesGroup}>
+          <div key={item.id} className={styles.notesGroup}>
             {item.notes.map((noteItem: NoteItemProps, index) => (
               <NoteItem key={noteItem.id} item={noteItem} index={index} />
             ))}

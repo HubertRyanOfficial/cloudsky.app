@@ -18,7 +18,7 @@ const InitialState = {
     },
   ],
   selected: null,
-  tags: [],
+  tags: [{ id: 1, name: null }],
   tagSelected: null,
   total: 0,
 };
@@ -35,6 +35,8 @@ export const ACTIONS = {
 };
 
 function appReducer(state, action) {
+  console.log(state);
+
   switch (action.type) {
     case ACTIONS.INITIAL_STATE: {
       return { ...state, ...action.payload };
@@ -42,16 +44,22 @@ function appReducer(state, action) {
     case ACTIONS.ADD_NEW_NOTE: {
       let notes = [...state.notes];
 
-      let index = !!state.tagsSelected
+      let index = !!state.tagSelected
         ? state.notes.findIndex((item) => item.id == state.tagSelected.id)
         : 0;
 
-      notes[index] = {
-        ...notes[index],
-        notes: [...notes[index].notes, action.payload],
-      };
-
-      console.log(notes);
+      if (index >= 0) {
+        notes[index] = {
+          ...notes[index],
+          notes: [...notes[index].notes, action.payload],
+        };
+      } else {
+        notes.push({
+          id: state.notes.length + 1,
+          tag: state.tags.find((item) => item.id == state.tagSelected.id),
+          notes: [action.payload],
+        });
+      }
 
       return {
         ...state,
