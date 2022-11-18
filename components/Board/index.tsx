@@ -62,7 +62,7 @@ const Board = () => {
             </motion.span>
             {selected && (
               <motion.span
-                onClick={() => removeNote(selected.id)}
+                onClick={() => removeNote()}
                 className={styles.optionDelete}
               >
                 Excluir

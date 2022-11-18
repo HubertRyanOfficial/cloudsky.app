@@ -46,7 +46,7 @@ const Notes = () => {
       </motion.div>
 
       {notes.map((item) => {
-        if (item.notes.length == 0) return null;
+        if (item?.notes?.length == 0) return null;
         if (item.tag)
           return (
             <div key={item.id}>

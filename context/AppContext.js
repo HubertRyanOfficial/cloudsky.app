@@ -49,13 +49,19 @@ function appReducer(state, action) {
       if (index >= 0) {
         notes[index] = {
           ...notes[index],
-          notes: [...notes[index].notes, action.payload],
+          notes: [
+            ...notes[index].notes,
+            {
+              ...action.payload,
+              tagId: state.tagSelected?.id ?? null,
+            },
+          ],
         };
       } else {
         notes.push({
           id: state.notes.length + 1,
           tag: state.tags.find((item) => item.id == state.tagSelected.id),
-          notes: [action.payload],
+          notes: [{ ...action.payload, tagId: state.tagSelected?.id ?? null }],
         });
       }
 
@@ -82,21 +88,36 @@ function appReducer(state, action) {
       };
     }
     case ACTIONS.SELECT_NOTE: {
-      let noteIndex = state.notes.findIndex(
-        (item) => item.id == action.payload
-      );
+      const note = action.payload;
+      let tagSelected = !!note.tagId
+        ? state.tags.find((item) => item.id == note.tagId)
+        : null;
+
       return {
         ...state,
-        selected: state.notes[noteIndex],
+        selected: action.payload,
+        tagSelected,
       };
     }
     case ACTIONS.REMOVE_NOTE: {
-      const notes = state.notes.filter((item) => item.id != action.payload);
+      let notes = [...state.notes];
+      let selectedNote = state.selected;
+
+      let tagGroupIndex = selectedNote?.tagId
+        ? notes.findIndex((item) => item.id == selectedNote.tagId)
+        : 0;
+      let groupState = notes[tagGroupIndex].notes.filter(
+        (item) => item.id != selectedNote.id
+      );
+
+      notes[tagGroupIndex].notes = groupState;
+
       return {
         ...state,
         notes,
         selected: null,
         total: state.total - 1,
+        tagSelected: null,
       };
     }
     case ACTIONS.FORCE_NEW_NOTE: {
@@ -154,10 +175,9 @@ function useApp() {
     });
   };
 
-  const removeNote = (id) => {
+  const removeNote = () => {
     dispatch({
       type: ACTIONS.REMOVE_NOTE,
-      payload: id,
     });
   };
 
