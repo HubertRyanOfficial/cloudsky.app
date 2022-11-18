@@ -6,7 +6,7 @@ import { useApp } from "../../context/AppContext";
 import { BiX, BiCheck, BiUnlink, BiLinkAlt } from "react-icons/bi";
 import styles from "./SelectTag.module.css";
 
-export default function SelectTag() {
+export default function SelectTag({ titleRef }: { titleRef: any }) {
   const { createNewTag, tags, tagSelected, selectTag, fixTag, setFixTag } =
     useApp();
 
@@ -32,6 +32,8 @@ export default function SelectTag() {
     setNewProject(false);
     setShowTags(false);
     setNewProjectName("");
+
+    handleFocusTitleInput();
   }
 
   function handleSelectTag(tag: any) {
@@ -41,6 +43,21 @@ export default function SelectTag() {
 
     setNewProject(false);
     setShowTags(false);
+    handleFocusTitleInput();
+  }
+
+  function handleFixTag() {
+    setFixTag(!fixTag);
+
+    if (!fixTag == true) {
+      handleFocusTitleInput();
+    }
+  }
+
+  function handleFocusTitleInput() {
+    if (titleRef?.current) {
+      titleRef.current.focus();
+    }
   }
 
   return (
@@ -94,7 +111,7 @@ export default function SelectTag() {
             style={{
               backgroundColor: fixTag ? "#ff4f4b" : "#ffffff",
             }}
-            onClick={() => setFixTag(!fixTag)}
+            onClick={() => handleFixTag()}
           >
             <BiLinkAlt size={22} color={!fixTag ? "#ff4f4b" : "#ffffff"} />
           </motion.div>

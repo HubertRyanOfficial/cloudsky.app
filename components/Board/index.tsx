@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Board.module.css";
 
 import { motion } from "framer-motion";
@@ -6,7 +6,7 @@ import { useApp } from "../../context/AppContext";
 
 import SelectTag from "../SelectTag";
 
-const Board = () => {
+const Board = ({ titleRef }: { titleRef: any }) => {
   const { addNewNote, editNote, selected, removeNote } = useApp();
 
   const [title, setTitle] = useState("");
@@ -37,10 +37,11 @@ const Board = () => {
 
   return (
     <div className={styles.container}>
-      <SelectTag />
+      <SelectTag titleRef={titleRef} />
       <div className={styles.inputContainer}>
         <div className={styles.inputContent}>
           <input
+            ref={titleRef}
             value={title}
             className={styles.inputItem}
             maxLength={50}

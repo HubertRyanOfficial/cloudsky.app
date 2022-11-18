@@ -17,13 +17,16 @@ interface NotesProps {
   notes: NoteItemProps[];
 }
 
-const Notes = () => {
+const Notes = ({ titleRef }: { titleRef: any }) => {
   const {
     notes,
     forceNewNote,
     total,
-  }: { notes: NotesProps[]; forceNewNote: () => void; total: number } =
-    useApp();
+  }: {
+    notes: NotesProps[];
+    forceNewNote: () => void;
+    total: number;
+  } = useApp();
 
   if (total == 0) return <EmptyState />;
 
@@ -43,7 +46,12 @@ const Notes = () => {
         }}
         transition={{ duration: 0.2 }}
         className={styles.newNote}
-        onClick={() => forceNewNote()}
+        onClick={() => {
+          forceNewNote();
+          if (titleRef?.current) {
+            titleRef.current.focus();
+          }
+        }}
       >
         <strong>Criar uma nova nota</strong>
       </motion.div>

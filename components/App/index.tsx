@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import styles from "./App.module.css";
 
 import { motion } from "framer-motion";
@@ -8,14 +9,16 @@ import Board from "../Board";
 import { useApp } from "../../context/AppContext";
 
 export default function App() {
+  const titleRef = useRef<any>(null);
+
   const { isLoading } = useApp();
 
   if (isLoading) return <Loading />;
 
   return (
     <main className={styles.main}>
-      <Notes />
-      <Board />
+      <Notes titleRef={titleRef} />
+      <Board titleRef={titleRef} />
     </main>
   );
 }
