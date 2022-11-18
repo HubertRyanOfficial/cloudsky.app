@@ -76,7 +76,7 @@ const Board = ({ titleRef }: { titleRef: any }) => {
       <textarea
         value={content}
         className={styles.inputItemContent}
-        placeholder="Ideias na nova nota"
+        placeholder="Coisas na nova nota"
         onChange={(e) => setContent(e.target.value)}
         autoCapitalize="words"
       />
