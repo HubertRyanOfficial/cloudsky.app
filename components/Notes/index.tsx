@@ -38,6 +38,9 @@ const Notes = () => {
           opacity: 1,
           y: 0,
         }}
+        whileTap={{
+          scale: 0.9,
+        }}
         transition={{ duration: 0.2 }}
         className={styles.newNote}
         onClick={() => forceNewNote()}
