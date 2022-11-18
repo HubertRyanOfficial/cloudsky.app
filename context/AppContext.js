@@ -70,12 +70,18 @@ function appReducer(state, action) {
         });
       }
 
-      return {
+      let newState = {
         ...state,
         notes,
         total: state.total + 1,
         tagSelected: null,
       };
+
+      if (!!state.fixTag) {
+        newState.tagSelected = state.tagSelected;
+      }
+
+      return newState;
     }
     case ACTIONS.EDIT_NOTE: {
       let notes = [...state.notes];
@@ -135,12 +141,19 @@ function appReducer(state, action) {
           content: action.payload.content,
         };
       }
-      return {
+
+      let newState = {
         ...state,
         notes,
         selected: null,
         tagSelected: null,
       };
+
+      if (!!state.fixTag) {
+        newState.tagSelected = state.tagSelected;
+      }
+
+      return newState;
     }
     case ACTIONS.SELECT_NOTE: {
       const note = action.payload;
@@ -167,19 +180,32 @@ function appReducer(state, action) {
 
       notes[tagGroupIndex].notes = groupState;
 
-      return {
+      let newState = {
         ...state,
         notes,
         selected: null,
         total: state.total - 1,
         tagSelected: null,
       };
+
+      if (!!state.fixTag) {
+        newState.tagSelected = state.tagSelected;
+      }
+
+      return newState;
     }
     case ACTIONS.FORCE_NEW_NOTE: {
-      return {
+      let newState = {
         ...state,
         selected: null,
+        tagSelected: null,
       };
+
+      if (!!state.fixTag) {
+        newState.tagSelected = state.tagSelected;
+      }
+
+      return newState;
     }
     case ACTIONS.CREATE_NEW_TAG: {
       return {
@@ -192,6 +218,13 @@ function appReducer(state, action) {
       return {
         ...state,
         tagSelected: action.payload,
+        fixTag: false,
+      };
+    }
+    case ACTIONS.SET_FIX_TAG: {
+      return {
+        ...state,
+        fixTag: action.payload,
       };
     }
     default: {
@@ -268,7 +301,7 @@ function useApp() {
     });
   };
 
-  const setFixtag = (value) =>
+  const setFixTag = (value) =>
     dispatch({ type: ACTIONS.SET_FIX_TAG, payload: value });
 
   return {
@@ -280,7 +313,7 @@ function useApp() {
     forceNewNote,
     createNewTag,
     selectTag,
-    setFixtag,
+    setFixTag,
   };
 }
 

@@ -7,7 +7,8 @@ import { BiX, BiCheck, BiUnlink, BiLinkAlt } from "react-icons/bi";
 import styles from "./SelectTag.module.css";
 
 export default function SelectTag() {
-  const { createNewTag, tags, tagSelected, selectTag } = useApp();
+  const { createNewTag, tags, tagSelected, selectTag, fixTag, setFixTag } =
+    useApp();
 
   const [showTags, setShowTags] = useState(false);
   const [newProject, setNewProject] = useState(false);
@@ -90,8 +91,12 @@ export default function SelectTag() {
             whileHover={{ opacity: 0.5 }}
             whileTap={{ scale: 0.9 }}
             className={styles.clearContent}
+            style={{
+              backgroundColor: fixTag ? "#ff4f4b" : "#ffffff",
+            }}
+            onClick={() => setFixTag(!fixTag)}
           >
-            <BiLinkAlt size={22} color="#ff4f4b" />
+            <BiLinkAlt size={22} color={!fixTag ? "#ff4f4b" : "#ffffff"} />
           </motion.div>
         )}
       </AnimatePresence>
