@@ -21,6 +21,7 @@ const InitialState = {
   tags: [{ id: 1, name: null }],
   tagSelected: null,
   total: 0,
+  fixTag: false,
 };
 
 export const ACTIONS = {
@@ -32,6 +33,7 @@ export const ACTIONS = {
   FORCE_NEW_NOTE: "FORCE_NEW_NOTE",
   CREATE_NEW_TAG: "CREATE_NEW_TAG",
   SELECT_TAG: "SELECT_TAG",
+  SET_FIX_TAG: "SET_FIX_TAG",
 };
 
 function appReducer(state, action) {
@@ -53,6 +55,7 @@ function appReducer(state, action) {
             ...notes[index].notes,
             {
               ...action.payload,
+              id: notes[index].notes.length + 1,
               tagId: state.tagSelected?.id ?? null,
             },
           ],
@@ -61,7 +64,9 @@ function appReducer(state, action) {
         notes.push({
           id: state.notes.length + 1,
           tag: state.tags.find((item) => item.id == state.tagSelected.id),
-          notes: [{ ...action.payload, tagId: state.tagSelected?.id ?? null }],
+          notes: [
+            { ...action.payload, id: 1, tagId: state.tagSelected?.id ?? null },
+          ],
         });
       }
 
@@ -74,17 +79,67 @@ function appReducer(state, action) {
     }
     case ACTIONS.EDIT_NOTE: {
       let notes = [...state.notes];
-      let noteIndex = notes.findIndex((item) => item.id == state.selected.id);
-      notes[noteIndex] = {
-        ...notes[noteIndex],
-        title: action.payload.title,
-        content: action.payload.content,
-      };
+      let noteGroupIndexSelected = !!state.selected.tagId
+        ? state.notes.findIndex((item) => item.id == state.selected.tagId)
+        : 0;
 
+      if (
+        noteGroupIndexSelected >= 0 &&
+        state.selected.tagId != state?.tagSelected?.id
+      ) {
+        notes[noteGroupIndexSelected].notes = notes[
+          noteGroupIndexSelected
+        ].notes.filter((item) => item.id != state.selected.id);
+
+        let index = !!state.tagSelected
+          ? notes.findIndex((item) => item.id == state.tagSelected.id)
+          : 0;
+
+        if (index >= 0) {
+          notes[index] = {
+            ...notes[index],
+            notes: [
+              ...notes[index].notes,
+              {
+                ...action.payload,
+                id: notes[index].notes.length + 1,
+                tagId: state.tagSelected?.id ?? null,
+              },
+            ],
+          };
+        } else {
+          notes.push({
+            id: state.notes.length + 1,
+            tag: state.tags.find((item) => item.id == state.tagSelected.id),
+            notes: [
+              {
+                ...action.payload,
+                id: 1,
+                tagId: state.tagSelected?.id ?? null,
+              },
+            ],
+          });
+        }
+      } else if (
+        state.selected.tagId == state?.tagSelected?.id ||
+        !state.tagSelected ||
+        !state.selected.tagId
+      ) {
+        let noteIndexSelected = notes[noteGroupIndexSelected].notes.findIndex(
+          (item) => item.id == state.selected.id
+        );
+
+        notes[noteGroupIndexSelected].notes[noteIndexSelected] = {
+          ...notes[noteGroupIndexSelected].notes[noteIndexSelected],
+          title: action.payload.title,
+          content: action.payload.content,
+        };
+      }
       return {
         ...state,
         notes,
         selected: null,
+        tagSelected: null,
       };
     }
     case ACTIONS.SELECT_NOTE: {
@@ -213,6 +268,9 @@ function useApp() {
     });
   };
 
+  const setFixtag = (value) =>
+    dispatch({ type: ACTIONS.SET_FIX_TAG, payload: value });
+
   return {
     ...state,
     addNewNote,
@@ -222,6 +280,7 @@ function useApp() {
     forceNewNote,
     createNewTag,
     selectTag,
+    setFixtag,
   };
 }
 

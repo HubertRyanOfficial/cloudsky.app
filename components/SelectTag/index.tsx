@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useApp } from "../../context/AppContext";
 
-import { BiX, BiCheck, BiUnlink } from "react-icons/bi";
+import { BiX, BiCheck, BiUnlink, BiLinkAlt } from "react-icons/bi";
 import styles from "./SelectTag.module.css";
 
 export default function SelectTag() {
@@ -73,6 +73,28 @@ export default function SelectTag() {
           <BiX size={22} color="#ff4f4b" />
         )}
       </motion.div>
+
+      <AnimatePresence>
+        {!showTags && !newProject && !!tagSelected && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            whileHover={{ opacity: 0.5 }}
+            whileTap={{ scale: 0.9 }}
+            className={styles.clearContent}
+          >
+            <BiLinkAlt size={22} color="#ff4f4b" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {showTags && !newProject && tagSelected && (
