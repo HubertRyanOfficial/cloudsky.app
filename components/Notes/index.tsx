@@ -107,7 +107,7 @@ const NoteGroupTitle = ({ title }: { title: string }) => {
           <motion.div
             initial={{
               opacity: 1,
-              scale: 0,
+              scale: 0.5,
             }}
             animate={{
               opacity: 1,
@@ -115,10 +115,34 @@ const NoteGroupTitle = ({ title }: { title: string }) => {
             }}
             exit={{
               opacity: 0,
-              scale: 0,
+              scale: 0.5,
             }}
             className={styles.notesGroupModalContainer}
-          ></motion.div>
+          >
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              whileTap={{ scale: 0.8 }}
+            >
+              Fixar
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              transition={{ delay: 0.1 }}
+              animate={{ opacity: 1 }}
+              whileTap={{ scale: 0.8 }}
+            >
+              Renomear
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              whileTap={{ scale: 0.8 }}
+            >
+              Excluir projeto
+            </motion.span>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
