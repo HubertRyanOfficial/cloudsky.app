@@ -1,6 +1,6 @@
 .container {
   width: 30%;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100vh;
 }
 
