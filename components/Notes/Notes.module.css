@@ -92,7 +92,7 @@
   font-weight: 500;
   transition: all 0.5s;
   cursor: default;
-  border-radius: 10px;
+  border-radius: 14px;
 }
 
 .notesGroupModalContainer > span:hover {
