@@ -23,3 +23,19 @@
   font-size: 3rem;
   color: var(--red);
 }
+
+.footer {
+  position: absolute;
+  bottom: 30px;
+}
+
+.footer > span {
+  font-size: 12px;
+  margin-right: 40px;
+  color: var(--dark-gray);
+  cursor: default;
+}
+
+.footer > span:hover {
+  text-decoration: underline;
+}

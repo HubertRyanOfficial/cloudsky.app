@@ -37,6 +37,20 @@ function Loading() {
       >
         Cloudsky
       </motion.h1>
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+        className={styles.footer}
+      >
+        <span>Sobre</span>
+        <span>Termos de serviço</span>
+        <span>Política de dados</span>
+      </motion.footer>
     </div>
   );
 }
