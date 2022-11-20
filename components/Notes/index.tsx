@@ -1,7 +1,9 @@
+import { useState } from "react";
+
 import { useApp } from "../../context/AppContext";
 import styles from "./Notes.module.css";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
@@ -60,7 +62,7 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
         if (item?.notes?.length == 0) return null;
         if (item.tag)
           return (
-            <div key={item.id}>
+            <div className={styles.notesGroupContainer} key={item.id}>
               <NoteGroupTitle title={item.tag.name} />
               <div className={styles.notesGroup}>
                 {item.notes.map((noteItem: NoteItemProps, index) => (
@@ -83,16 +85,43 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
 };
 
 const NoteGroupTitle = ({ title }: { title: string }) => {
+  const [showsOptions, setShowsOptions] = useState(false);
   return (
-    <motion.div className={styles.notesGroupTitle} whileTap={{ scale: 0.9 }}>
-      <div className={styles.notesGroupTitleCircle} />
-      <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
-      <BiDotsHorizontalRounded
-        size={25}
-        color="#dddddd"
-        style={{ marginRight: 20 }}
-      />
-    </motion.div>
+    <>
+      <motion.div
+        onClick={() => setShowsOptions(!showsOptions)}
+        className={styles.notesGroupTitle}
+        whileTap={{ scale: 0.9 }}
+      >
+        <div className={styles.notesGroupTitleCircle} />
+        <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
+        <BiDotsHorizontalRounded
+          size={25}
+          color="#dddddd"
+          style={{ marginRight: 20 }}
+        />
+      </motion.div>
+
+      <AnimatePresence>
+        {showsOptions && (
+          <motion.div
+            initial={{
+              opacity: 1,
+              scale: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0,
+            }}
+            className={styles.notesGroupModalContainer}
+          ></motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
