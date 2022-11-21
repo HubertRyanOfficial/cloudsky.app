@@ -40,7 +40,7 @@ To run the project locally after cloning it on your local machine, just run the 
 npm install
 
 ```
-or
+or you'd rather
 ```sh
 yarn
 
