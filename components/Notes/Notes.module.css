@@ -129,3 +129,60 @@
   cursor: default;
   border-radius: 14px;
 }
+
+.removeTagContent {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.removeTagBox {
+  background-color: #ffffff;
+  width: 20%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 1px 1px 5px #bbbbbb;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.removeTagBox > strong {
+  font-size: 22px;
+  font-weight: 500;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.removeTagBox > span {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--dark-gray);
+}
+
+.removeTagBoxHeader {
+  align-self: flex-end;
+}
+
+.removeConfirm {
+  background-color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: default;
+}
+
+.removeConfirm > span {
+  color: #ffffff;
+}

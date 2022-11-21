@@ -5,7 +5,12 @@ import styles from "./Notes.module.css";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { BiDotsHorizontalRounded, BiPin, BiChevronLeft } from "react-icons/bi";
+import {
+  BiDotsHorizontalRounded,
+  BiPin,
+  BiChevronLeft,
+  BiX,
+} from "react-icons/bi";
 
 import NoteItem from "../NoteItem";
 import { NoteItemProps } from "../NoteItem";
@@ -126,10 +131,12 @@ const NoteGroupTitle = ({
 }) => {
   const [showsOptions, setShowsOptions] = useState(false);
   const [showRenameTag, setShowRenameTag] = useState(false);
+  const [confirmRemoveTag, setConfirmRemoveTag] = useState(false);
   const [newNameValue, setNewNameValue] = useState(data?.name ?? "");
 
   function handleRemoveTag() {
     setShowsOptions(false);
+    setConfirmRemoveTag(false);
     removeTag(data.id);
   }
 
@@ -205,7 +212,10 @@ const NoteGroupTitle = ({
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                   whileTap={{ scale: 0.8 }}
-                  onClick={() => handleRemoveTag()}
+                  onClick={() => {
+                    handleToggleModal();
+                    setConfirmRemoveTag(true);
+                  }}
                 >
                   Excluir projeto
                 </motion.span>
@@ -239,6 +249,41 @@ const NoteGroupTitle = ({
                 />
               </>
             )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {confirmRemoveTag && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.removeTagContent}
+            onClick={() => setConfirmRemoveTag(false)}
+          >
+            <div
+              className={styles.removeTagBox}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className={styles.removeTagBoxHeader}
+                onClick={() => setConfirmRemoveTag(false)}
+              >
+                <BiX size={22} />
+              </motion.div>
+              <strong>Tem certeza?</strong>
+              <span>
+                Confirme se realmente deseja remover esse projeto de um vez.
+              </span>
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className={styles.removeConfirm}
+                onClick={() => handleRemoveTag()}
+              >
+                <span>Remove projeto</span>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
