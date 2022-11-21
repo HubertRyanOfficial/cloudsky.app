@@ -15,6 +15,7 @@ const InitialState = {
       id: 1,
       tag: null,
       notes: [],
+      fixed: false,
     },
   ],
   selected: null,
@@ -35,6 +36,7 @@ export const ACTIONS = {
   SELECT_TAG: "SELECT_TAG",
   SET_FIX_TAG: "SET_FIX_TAG",
   REMOVE_TAG: "REMOVE_TAG",
+  PIN_TAG: "PIN_TAG",
 };
 
 function appReducer(state, action) {
@@ -65,6 +67,7 @@ function appReducer(state, action) {
         notes.push({
           id: state.notes.length + 1,
           tag: state.tags.find((item) => item.id == state.tagSelected.id),
+          fixed: false,
           notes: [
             { ...action.payload, id: 1, tagId: state.tagSelected?.id ?? null },
           ],
@@ -238,6 +241,23 @@ function appReducer(state, action) {
         notes,
         tags: state.tags.filter((item) => item.id != tagId),
         total: state.total - tagData.notes.length,
+        tagSelected: null,
+        selected: null,
+      };
+    }
+    case ACTIONS.PIN_TAG: {
+      const tagId = action.payload;
+      let notes = [...state.notes];
+      let tagGroupIndex = notes.findIndex((item) => item?.tag?.id == tagId);
+
+      notes[tagGroupIndex] = {
+        ...notes[tagGroupIndex],
+        fixed: !notes[tagGroupIndex]?.fixed,
+      };
+
+      return {
+        ...state,
+        notes,
       };
     }
     default: {
@@ -320,6 +340,8 @@ function useApp() {
   const removeTag = (tagId) =>
     dispatch({ type: ACTIONS.REMOVE_TAG, payload: tagId });
 
+  const pinTag = (tagId) => dispatch({ type: ACTIONS.PIN_TAG, payload: tagId });
+
   return {
     ...state,
     addNewNote,
@@ -331,6 +353,7 @@ function useApp() {
     selectTag,
     setFixTag,
     removeTag,
+    pinTag,
   };
 }
 

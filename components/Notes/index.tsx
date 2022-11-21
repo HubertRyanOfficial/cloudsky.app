@@ -5,7 +5,7 @@ import styles from "./Notes.module.css";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { BiDotsHorizontalRounded, BiPin } from "react-icons/bi";
 
 import NoteItem from "../NoteItem";
 import { NoteItemProps } from "../NoteItem";
@@ -16,6 +16,7 @@ interface NotesProps {
     id: string;
     name: string;
   };
+  fixed: boolean;
   notes: NoteItemProps[];
 }
 
@@ -25,14 +26,27 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
     forceNewNote,
     total,
     removeTag,
+    pinTag,
   }: {
     notes: NotesProps[];
     forceNewNote: () => void;
     total: number;
     removeTag: (tagId: string) => void;
+    pinTag: (tagId: string) => void;
   } = useApp();
 
   if (total == 0) return <EmptyState />;
+
+  const sortedNotes = notes.sort((a, b) => {
+    let tagA = a.fixed;
+    let tagB = b.fixed;
+
+    if (tagA && !tagB)
+      //sort string ascending
+      return -1;
+    if (!tagA && tagB) return 1;
+    return -1;
+  });
 
   return (
     <div className={styles.container}>
@@ -60,12 +74,17 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
         <strong>Criar uma nova nota</strong>
       </motion.div>
 
-      {notes.map((item) => {
+      {sortedNotes.map((item) => {
         if (item?.notes?.length == 0) return null;
         if (item.tag)
           return (
             <div className={styles.notesGroupContainer} key={item.id}>
-              <NoteGroupTitle data={item.tag} removeTag={removeTag} />
+              <NoteGroupTitle
+                data={item.tag}
+                removeTag={removeTag}
+                fixed={item.fixed}
+                pinTag={pinTag}
+              />
               <div className={styles.notesGroup}>
                 {item.notes.map((noteItem: NoteItemProps, index) => (
                   <NoteItem key={noteItem.id} item={noteItem} index={index} />
@@ -89,18 +108,27 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
 const NoteGroupTitle = ({
   data,
   removeTag,
+  fixed,
+  pinTag,
 }: {
   data: {
     name: string;
     id: string;
   };
+  fixed: boolean;
   removeTag: any;
+  pinTag: any;
 }) => {
   const [showsOptions, setShowsOptions] = useState(false);
 
   function handleRemoveTag() {
     setShowsOptions(false);
     removeTag(data.id);
+  }
+
+  function hanldePinTag() {
+    setShowsOptions(false);
+    pinTag(data.id);
   }
 
   return (
@@ -110,7 +138,7 @@ const NoteGroupTitle = ({
         className={styles.notesGroupTitle}
         whileTap={{ scale: 0.9 }}
       >
-        <div className={styles.notesGroupTitleCircle} />
+        {fixed && <BiPin size={22} color="#ff4f4b" />}
         <span>{data.name.charAt(0).toUpperCase() + data.name.slice(1)}</span>
         <BiDotsHorizontalRounded
           size={25}
@@ -135,13 +163,14 @@ const NoteGroupTitle = ({
               scale: 0.5,
             }}
             className={styles.notesGroupModalContainer}
+            onClick={() => hanldePinTag()}
           >
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               whileTap={{ scale: 0.8 }}
             >
-              Fixar
+              {!fixed ? "Fixar" : "Desfixar"}
             </motion.span>
             <motion.span
               initial={{ opacity: 0 }}
