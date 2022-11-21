@@ -54,4 +54,4 @@ We recommend version 12 or higher node version. We are currently not using any d
 
 ## Deploy
 
-To deploy, we use a new version of the firebase CLI that allows us to deploy the application with a web framework. First of all you install firebase CLI ```npm i firebase-tools -g``` and login with your account ```firebase login```.
+To deploy, we use a new version of the firebase CLI that allows us to deploy the application with a web framework. First of all you install firebase CLI ```npm i firebase-tools -g``` and login with your account ```firebase login```. Creating a new firebase project with your Google Account accessing https://console.firebase.google.com (It's so easy creating a project).
