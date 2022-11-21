@@ -297,12 +297,16 @@ const NoteGroupTitle = ({
 
 const EmptyState = () => {
   return (
-    <div className={styles.emptyContainer}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={styles.emptyContainer}
+    >
       <span>
         Aqui ficarão todas as suas notas. Comece a criar suas notas no lado
         direito!
       </span>
-    </div>
+    </motion.div>
   );
 };
 
