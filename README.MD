@@ -27,3 +27,7 @@ Typescript has helped us a lot with typing and property awareness on external co
 **Framer Motion?**
 
 Framer Motion was a great option for us to expand animations today in the react ecosystem. Framer has been coming with new features and facilitating animations with JSX. I strongly recommend using it in any application.
+
+**Why Lottie?**
+
+Lottie makes complex animations a lot easier when it comes to animations in seconds and can be easily created using Adobe Affter Effects, taking away from the large library of ready-to-use animations.
