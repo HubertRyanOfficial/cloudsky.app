@@ -23,3 +23,7 @@ With each passing year, we need to understand even more the concepts that are do
 **Why Typescript?**
 
 Typescript has helped us a lot with typing and property awareness on external components within the application. With it, it has greatly facilitated the creation of components and the understanding of future devs in the project. This was one of the main reasons for using it.
+
+**Framer Motion?**
+
+Framer Motion was a great option for us to expand animations today in the react ecosystem. Framer has been coming with new features and facilitating animations with JSX. I strongly recommend using it in any application.
