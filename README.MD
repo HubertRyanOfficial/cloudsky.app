@@ -1,6 +1,6 @@
-
-![Logo](https://i.imgur.com/VnIaNJp.png)
-
+<p align="center">
+  <img src="https://i.imgur.com/VnIaNJp.png" width="720" title="Whatsapp">
+</p>
 
 ## [Cloudsky.app](https://cloudsky.app)
 
