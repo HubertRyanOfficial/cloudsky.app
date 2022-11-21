@@ -24,7 +24,11 @@ const NoteItem = ({ item, index }: Props) => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       whileTap={{ scale: 0.9 }}
-      transition={{ delay: item.new ? 0 : index / 10, duration: 0.4 }}
+      exit={{ y: -20, opacity: 0 }}
+      transition={{
+        delay: item.new ? 0 : index / 10,
+        duration: 0.4,
+      }}
       className={styles.container}
       onClick={() => selectNote(item)}
     >

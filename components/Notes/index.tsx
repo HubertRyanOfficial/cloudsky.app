@@ -94,18 +94,22 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
                 renameTag={renameTag}
               />
               <div className={styles.notesGroup}>
-                {item.notes.map((noteItem: NoteItemProps, index) => (
-                  <NoteItem key={noteItem.id} item={noteItem} index={index} />
-                ))}
+                <AnimatePresence>
+                  {item.notes.map((noteItem: NoteItemProps, index) => (
+                    <NoteItem key={noteItem.id} item={noteItem} index={index} />
+                  ))}
+                </AnimatePresence>
               </div>
             </div>
           );
 
         return (
           <div key={item.id}>
-            {item.notes.map((noteItem: NoteItemProps, index) => (
-              <NoteItem key={noteItem.id} item={noteItem} index={index} />
-            ))}
+            <AnimatePresence>
+              {item.notes.map((noteItem: NoteItemProps, index) => (
+                <NoteItem key={noteItem.id} item={noteItem} index={index} />
+              ))}
+            </AnimatePresence>
           </div>
         );
       })}
