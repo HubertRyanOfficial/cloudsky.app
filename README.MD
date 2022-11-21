@@ -13,6 +13,7 @@ About more: [cloudsky.app](https://cloudsky.app).![App](https://i.imgur.com/ueTV
 
 - [x] Next JS
 - [x] Typescript
+- [x] Firebase Hosting
 - [x] Framer Motion
 - [x] Lottie Animations
 
@@ -23,6 +24,10 @@ With each passing year, we need to understand even more the concepts that are do
 **Why Typescript?**
 
 Typescript has helped us a lot with typing and property awareness on external components within the application. With it, it has greatly facilitated the creation of components and the understanding of future devs in the project. This was one of the main reasons for using it.
+
+**Why Firebase?**
+
+With firebase there are several tools that help us to deploy our application. Using firebase hosting made this project very easy to deploy and index on Google 🤩.
 
 **Framer Motion?**
 
@@ -46,3 +51,7 @@ yarn
 
 ```
 We recommend version 12 or higher node version. We are currently not using any databases, rather we are storing everything locally. In short, if you uninstall the browser after accessing or storing something in cloudsky.app, you will lose everything.
+
+## Deploy
+
+To deploy, we use a new version of the firebase CLI that allows us to deploy the application with a web framework. First of all you install firebase CLI ```sh npm i firebase-tools -g``` and login with your account ```sh firebase login.
