@@ -50,6 +50,9 @@ or you'd rather
 yarn
 
 ```
+
+an then ```npm run dev```
+
 We recommend version 12 or higher node version. We are currently not using any databases, rather we are storing everything locally. In short, if you uninstall the browser after accessing or storing something in cloudsky.app, you will lose everything.
 
 ## Deploy
@@ -57,11 +60,19 @@ We recommend version 12 or higher node version. We are currently not using any d
 To deploy, we use a new version of the firebase CLI that allows us to deploy the application with a web framework. First of all you install firebase CLI ```npm i firebase-tools -g``` and login with your account ```firebase login```. Creating a new firebase project with your Google Account accessing https://console.firebase.google.com (It's so easy creating a project) and then:
 
 ```sh
-firebase init --hosting
+
+#Initializing a project just hosting firebase feature
+firebase init hosting
 
 ```
 
-Soon after, it will be easy to deploy using:
+Soon after, it will be easy to deploy allowing firebase frameworks web experiments. Remembering that deploy with framework in firebase only allowed through version **11.14.2 or later** :
+
+```sh
+firebase experiments:enable webframeworks
+
+```
+and now: 
 
 ```sh
 firebase deploy
@@ -69,5 +80,6 @@ firebase deploy
 ```
 or
 ```sh
+#Deploying just hosting website
 firebase deploy --only hosting
 ```
