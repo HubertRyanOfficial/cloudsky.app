@@ -1,3 +1,3 @@
 <p align="center">
-  <img src="https://imgur.com/a/YMGBceJ.png" width="720" title="Cloudsky.app">
+  <img src="https://i.imgur.com/VnIaNJp.png" width="720" title="Cloudsky.app">
 </p>
