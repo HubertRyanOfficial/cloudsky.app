@@ -19,10 +19,11 @@ export default function Home() {
         </title>
 
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:locale" content="pt_BR" key="locale" />
         <meta
           property="og:keywords"
           content="Notes,project,notes app,hubert ryan,notas,bloco de notas,organização"
+          key="keywords"
         />
         <meta property="og:type" content="website" />
         <meta
@@ -34,8 +35,8 @@ export default function Home() {
         <meta property="og:site_name" content="Cloudsky" />
         <meta property="og:image" content="https://i.imgur.com/VnIaNJp.png" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="800" />
-        <meta property="og:image:height" content="800" />
+        <meta property="og:image:width" content="697" />
+        <meta property="og:image:height" content="295" />
         <meta name="twitter:title" content="CloudSky" />
         <meta
           name="twitter:description"
