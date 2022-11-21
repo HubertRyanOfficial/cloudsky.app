@@ -9,7 +9,7 @@ The goal of this project is to include and learn more about next js and react js
 
 About more: [cloudsky.app](https://cloudsky.app).![App](https://i.imgur.com/ueTVJyP.png)
 
-### Technologies used
+## Technologies used
 
 - [x] Next JS
 - [x] Typescript
