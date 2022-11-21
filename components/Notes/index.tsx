@@ -281,7 +281,7 @@ const NoteGroupTitle = ({
                 className={styles.removeConfirm}
                 onClick={() => handleRemoveTag()}
               >
-                <span>Remove projeto</span>
+                <span>Remover projeto</span>
               </motion.div>
             </div>
           </motion.div>
