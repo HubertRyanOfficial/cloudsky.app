@@ -45,4 +45,4 @@ or you'd rather
 yarn
 
 ```
-We recommend to use 12 or major node version.
+We recommend version 12 or higher node version. We are currently not using any databases, rather we are storing everything locally. In short, if you uninstall the browser after accessing or storing something in cloudsky.app, you will lose everything.
