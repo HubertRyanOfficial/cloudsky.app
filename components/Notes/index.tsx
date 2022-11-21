@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useApp } from "../../context/AppContext";
 import styles from "./Notes.module.css";
@@ -120,6 +120,8 @@ const NoteGroupTitle = ({
   pinTag: any;
 }) => {
   const [showsOptions, setShowsOptions] = useState(false);
+  const [renameTag, setRenameTag] = useState(false);
+  const [newNameValue, setNewNameValue] = useState("");
 
   function handleRemoveTag() {
     setShowsOptions(false);
@@ -134,7 +136,10 @@ const NoteGroupTitle = ({
   return (
     <>
       <motion.div
-        onClick={() => setShowsOptions(!showsOptions)}
+        onClick={() => {
+          if (showsOptions) setRenameTag(false);
+          setShowsOptions(!showsOptions);
+        }}
         className={styles.notesGroupTitle}
         whileTap={{ scale: 0.9 }}
       >
@@ -163,32 +168,63 @@ const NoteGroupTitle = ({
               scale: 0.5,
             }}
             className={styles.notesGroupModalContainer}
-            onClick={() => hanldePinTag()}
           >
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              whileTap={{ scale: 0.8 }}
-            >
-              {!fixed ? "Fixar" : "Desfixar"}
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              transition={{ delay: 0.1 }}
-              animate={{ opacity: 1 }}
-              whileTap={{ scale: 0.8 }}
-            >
-              Renomear
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              whileTap={{ scale: 0.8 }}
-              onClick={() => handleRemoveTag()}
-            >
-              Excluir projeto
-            </motion.span>
+            {!renameTag ? (
+              <>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  whileTap={{ scale: 0.8 }}
+                  onClick={() => hanldePinTag()}
+                >
+                  {!fixed ? "Fixar" : "Desfixar"}
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  transition={{ delay: 0.1 }}
+                  animate={{ opacity: 1 }}
+                  whileTap={{ scale: 0.8 }}
+                  onClick={() => setRenameTag(true)}
+                >
+                  Renomear
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  whileTap={{ scale: 0.8 }}
+                  onClick={() => handleRemoveTag()}
+                >
+                  Excluir projeto
+                </motion.span>
+              </>
+            ) : (
+              <>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  transition={{ delay: 0.1 }}
+                  animate={{ opacity: 1 }}
+                  whileTap={{ scale: 0.8 }}
+                  onClick={() => setRenameTag(true)}
+                  style={{
+                    marginLeft: 0,
+                    marginTop: 0,
+                    paddingTop: 0,
+                  }}
+                >
+                  Renomear
+                </motion.span>
+                <motion.input
+                  value={newNameValue}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  whileTap={{ scale: 0.8 }}
+                  onChange={(e) => setNewNameValue(e.target.value)}
+                  autoFocus
+                />
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

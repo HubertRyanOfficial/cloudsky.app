@@ -98,3 +98,17 @@
 .notesGroupModalContainer > span:hover {
   background-color: var(--cinder);
 }
+
+.notesGroupModalContainer > input {
+  padding: 15px;
+  margin: 0px 20px;
+  margin-bottom: 3px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.5s;
+  cursor: default;
+  border-radius: 14px;
+  border: 0px;
+  background-color: var(--cinder);
+  outline: none;
+}
