@@ -39,8 +39,9 @@ To run the project locally after cloning it on your local machine, just run the 
 ```sh
 npm install
 
+```
 or
-
+```sh
 yarn
 
 ```
