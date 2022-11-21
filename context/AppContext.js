@@ -322,7 +322,10 @@ function AppProvider({ children }) {
   const contextValues = useMemo(() => [state, dispatch], [state]);
 
   useEffect(() => {
-    localStorage.removeItem("@cloudsky-general-storage");
+    const env = process.env.NODE_ENV;
+    if (env == "development") {
+      localStorage.removeItem("@cloudsky-general-storage");
+    }
 
     async function loadApp() {
       const response = await localStorage.getItem("@cloudsky-general-storage");
