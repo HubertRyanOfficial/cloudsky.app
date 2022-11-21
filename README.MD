@@ -45,3 +45,4 @@ or you'd rather
 yarn
 
 ```
+We recommend to use 12 or major node version.
