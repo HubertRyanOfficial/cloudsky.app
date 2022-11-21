@@ -11,7 +11,15 @@ About more: [cloudsky.app](https://cloudsky.app).![App](https://i.imgur.com/ueTV
 
 ### Technologies used
 
-- [x] Typescript
 - [x] Next JS
+- [x] Typescript
 - [x] Framer Motion
 - [x] Lottie Animations
+
+Why Next JS?
+
+With each passing year, we need to understand even more the concepts that are dominating the front-end world. So in addition to being the main reasons for creating this project, it will help us to better understand the structure and how to apply it with the SSR and SSG concepts.
+
+Why Typescript?
+
+Typescript has helped us a lot with typing and property awareness on external components within the application. With it, it has greatly facilitated the creation of components and the understanding of future devs in the project. This was one of the main reasons for using it.
