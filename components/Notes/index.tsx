@@ -5,7 +5,7 @@ import styles from "./Notes.module.css";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { BiDotsHorizontalRounded, BiPin } from "react-icons/bi";
+import { BiDotsHorizontalRounded, BiPin, BiChevronLeft } from "react-icons/bi";
 
 import NoteItem from "../NoteItem";
 import { NoteItemProps } from "../NoteItem";
@@ -27,12 +27,14 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
     total,
     removeTag,
     pinTag,
+    renameTag,
   }: {
     notes: NotesProps[];
     forceNewNote: () => void;
     total: number;
-    removeTag: (tagId: string) => void;
-    pinTag: (tagId: string) => void;
+    removeTag: (payload: any) => void;
+    pinTag: (payload: any) => void;
+    renameTag: (payload: any) => void;
   } = useApp();
 
   if (total == 0) return <EmptyState />;
@@ -81,9 +83,10 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
             <div className={styles.notesGroupContainer} key={item.id}>
               <NoteGroupTitle
                 data={item.tag}
-                removeTag={removeTag}
                 fixed={item.fixed}
+                removeTag={removeTag}
                 pinTag={pinTag}
+                renameTag={renameTag}
               />
               <div className={styles.notesGroup}>
                 {item.notes.map((noteItem: NoteItemProps, index) => (
@@ -107,9 +110,10 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
 
 const NoteGroupTitle = ({
   data,
-  removeTag,
   fixed,
+  removeTag,
   pinTag,
+  renameTag,
 }: {
   data: {
     name: string;
@@ -118,10 +122,11 @@ const NoteGroupTitle = ({
   fixed: boolean;
   removeTag: any;
   pinTag: any;
+  renameTag: any;
 }) => {
   const [showsOptions, setShowsOptions] = useState(false);
-  const [renameTag, setRenameTag] = useState(false);
-  const [newNameValue, setNewNameValue] = useState("");
+  const [showRenameTag, setShowRenameTag] = useState(false);
+  const [newNameValue, setNewNameValue] = useState(data?.name ?? "");
 
   function handleRemoveTag() {
     setShowsOptions(false);
@@ -133,13 +138,20 @@ const NoteGroupTitle = ({
     pinTag(data.id);
   }
 
+  function handleToggleModal() {
+    if (showsOptions) setShowRenameTag(false);
+    setShowsOptions(!showsOptions);
+  }
+
+  function handleRenameTag() {
+    handleToggleModal();
+    renameTag({ tagId: data.id, newname: newNameValue });
+  }
+
   return (
     <>
       <motion.div
-        onClick={() => {
-          if (showsOptions) setRenameTag(false);
-          setShowsOptions(!showsOptions);
-        }}
+        onClick={() => handleToggleModal()}
         className={styles.notesGroupTitle}
         whileTap={{ scale: 0.9 }}
       >
@@ -169,7 +181,7 @@ const NoteGroupTitle = ({
             }}
             className={styles.notesGroupModalContainer}
           >
-            {!renameTag ? (
+            {!showRenameTag ? (
               <>
                 <motion.span
                   initial={{ opacity: 0 }}
@@ -184,7 +196,7 @@ const NoteGroupTitle = ({
                   transition={{ delay: 0.1 }}
                   animate={{ opacity: 1 }}
                   whileTap={{ scale: 0.8 }}
-                  onClick={() => setRenameTag(true)}
+                  onClick={() => setShowRenameTag(true)}
                 >
                   Renomear
                 </motion.span>
@@ -200,28 +212,30 @@ const NoteGroupTitle = ({
               </>
             ) : (
               <>
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  transition={{ delay: 0.1 }}
-                  animate={{ opacity: 1 }}
-                  whileTap={{ scale: 0.8 }}
-                  onClick={() => setRenameTag(true)}
-                  style={{
-                    marginLeft: 0,
-                    marginTop: 0,
-                    paddingTop: 0,
-                  }}
+                <div
+                  className={styles.renameContainer}
+                  onClick={() => setShowRenameTag(false)}
                 >
-                  Renomear
-                </motion.span>
+                  <BiChevronLeft size={28} />
+                  <motion.span
+                    initial={{ opacity: 0, marginLeft: 0 }}
+                    animate={{ opacity: 1, marginLeft: 20 }}
+                    transition={{ duration: 0.2 }}
+                    whileTap={{ scale: 0.8 }}
+                  >
+                    Renomear
+                  </motion.span>
+                </div>
+
                 <motion.input
                   value={newNameValue}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.1 }}
                   whileTap={{ scale: 0.8 }}
                   onChange={(e) => setNewNameValue(e.target.value)}
                   autoFocus
+                  onKeyDown={(e) => e.key == "Enter" && handleRenameTag()}
                 />
               </>
             )}

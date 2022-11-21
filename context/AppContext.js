@@ -37,6 +37,7 @@ export const ACTIONS = {
   SET_FIX_TAG: "SET_FIX_TAG",
   REMOVE_TAG: "REMOVE_TAG",
   PIN_TAG: "PIN_TAG",
+  RENAME_TAG: "RENAME_TAG",
 };
 
 function appReducer(state, action) {
@@ -243,6 +244,7 @@ function appReducer(state, action) {
         total: state.total - tagData.notes.length,
         tagSelected: null,
         selected: null,
+        fixTag: false,
       };
     }
     case ACTIONS.PIN_TAG: {
@@ -258,6 +260,39 @@ function appReducer(state, action) {
       return {
         ...state,
         notes,
+      };
+    }
+    case ACTIONS.RENAME_TAG: {
+      const tagId = action.payload.tagId;
+      const newName = action.payload.newname;
+
+      let notes = [...state.notes];
+      let tags = [...state.tags];
+
+      let tagGroupIndex = notes.findIndex((item) => item?.tag?.id == tagId);
+      let tagIndex = notes.findIndex(
+        (item) => item.id == notes[tagGroupIndex].tag.id
+      );
+
+      tags[tagIndex] = {
+        ...tags[tagIndex],
+        name: newName,
+      };
+
+      notes[tagGroupIndex] = {
+        ...notes[tagGroupIndex],
+        tag: {
+          ...notes[tagGroupIndex].tag,
+          name: newName,
+        },
+      };
+      return {
+        ...state,
+        notes,
+        tags,
+        tagSelected: null,
+        selected: null,
+        fixTag: false,
       };
     }
     default: {
@@ -342,6 +377,9 @@ function useApp() {
 
   const pinTag = (tagId) => dispatch({ type: ACTIONS.PIN_TAG, payload: tagId });
 
+  const renameTag = (payload) =>
+    dispatch({ type: ACTIONS.RENAME_TAG, payload });
+
   return {
     ...state,
     addNewNote,
@@ -354,6 +392,7 @@ function useApp() {
     setFixTag,
     removeTag,
     pinTag,
+    renameTag,
   };
 }
 
