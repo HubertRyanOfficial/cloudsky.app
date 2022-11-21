@@ -11,7 +11,7 @@ About more: [cloudsky.app](https://cloudsky.app).![App](https://i.imgur.com/ueTV
 
 ### Technologies used
 
-[ x ] - Typescript
-[ x ] - Next JS
-[ x ] - Framer Motion
-[ x ] - Lottie Animations
+- [x] Typescript
+- [x] Next JS
+- [x] Framer Motion
+- [x] Lottie Animations
