@@ -34,6 +34,7 @@ export const ACTIONS = {
   CREATE_NEW_TAG: "CREATE_NEW_TAG",
   SELECT_TAG: "SELECT_TAG",
   SET_FIX_TAG: "SET_FIX_TAG",
+  REMOVE_TAG: "REMOVE_TAG",
 };
 
 function appReducer(state, action) {
@@ -227,6 +228,18 @@ function appReducer(state, action) {
         fixTag: action.payload,
       };
     }
+    case ACTIONS.REMOVE_TAG: {
+      const tagId = action.payload;
+      let tagData = state.notes.find((item) => item?.tag?.id == tagId);
+      let notes = [...state.notes].filter((item) => item?.tag?.id != tagId);
+
+      return {
+        ...state,
+        notes,
+        tags: state.tags.filter((item) => item.id != tagId),
+        total: state.total - tagData.notes.length,
+      };
+    }
     default: {
       return state;
     }
@@ -304,6 +317,9 @@ function useApp() {
   const setFixTag = (value) =>
     dispatch({ type: ACTIONS.SET_FIX_TAG, payload: value });
 
+  const removeTag = (tagId) =>
+    dispatch({ type: ACTIONS.REMOVE_TAG, payload: tagId });
+
   return {
     ...state,
     addNewNote,
@@ -314,6 +330,7 @@ function useApp() {
     createNewTag,
     selectTag,
     setFixTag,
+    removeTag,
   };
 }
 

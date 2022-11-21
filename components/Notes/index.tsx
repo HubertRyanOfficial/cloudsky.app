@@ -24,10 +24,12 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
     notes,
     forceNewNote,
     total,
+    removeTag,
   }: {
     notes: NotesProps[];
     forceNewNote: () => void;
     total: number;
+    removeTag: (tagId: string) => void;
   } = useApp();
 
   if (total == 0) return <EmptyState />;
@@ -63,7 +65,7 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
         if (item.tag)
           return (
             <div className={styles.notesGroupContainer} key={item.id}>
-              <NoteGroupTitle title={item.tag.name} />
+              <NoteGroupTitle data={item.tag} removeTag={removeTag} />
               <div className={styles.notesGroup}>
                 {item.notes.map((noteItem: NoteItemProps, index) => (
                   <NoteItem key={noteItem.id} item={noteItem} index={index} />
@@ -84,8 +86,23 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
   );
 };
 
-const NoteGroupTitle = ({ title }: { title: string }) => {
+const NoteGroupTitle = ({
+  data,
+  removeTag,
+}: {
+  data: {
+    name: string;
+    id: string;
+  };
+  removeTag: any;
+}) => {
   const [showsOptions, setShowsOptions] = useState(false);
+
+  function handleRemoveTag() {
+    setShowsOptions(false);
+    removeTag(data.id);
+  }
+
   return (
     <>
       <motion.div
@@ -94,7 +111,7 @@ const NoteGroupTitle = ({ title }: { title: string }) => {
         whileTap={{ scale: 0.9 }}
       >
         <div className={styles.notesGroupTitleCircle} />
-        <span>{title.charAt(0).toUpperCase() + title.slice(1)}</span>
+        <span>{data.name.charAt(0).toUpperCase() + data.name.slice(1)}</span>
         <BiDotsHorizontalRounded
           size={25}
           color="#dddddd"
@@ -139,6 +156,7 @@ const NoteGroupTitle = ({ title }: { title: string }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
               whileTap={{ scale: 0.8 }}
+              onClick={() => handleRemoveTag()}
             >
               Excluir projeto
             </motion.span>
