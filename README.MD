@@ -31,3 +31,16 @@ Framer Motion was a great option for us to expand animations today in the react 
 **Why Lottie?**
 
 Lottie makes complex animations a lot easier when it comes to animations in seconds and can be easily created using Adobe Affter Effects, taking away from the large library of ready-to-use animations.
+
+## Getting Started
+
+To run the project locally after cloning it on your local machine, just run the following commands in your terminal:
+
+```sh
+npm install
+
+or
+
+yarn
+
+```
