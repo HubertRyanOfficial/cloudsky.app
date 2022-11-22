@@ -52,7 +52,7 @@ const Notes = ({ titleRef }: { titleRef: any }) => {
       //sort string ascending
       return -1;
     if (!tagA && tagB) return 1;
-    return -1;
+    return 0;
   });
 
   return (
